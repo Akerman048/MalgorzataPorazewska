@@ -1,0 +1,123 @@
+.works {
+  padding-top: 80px;
+  margin-bottom: 30px;
+}
+
+/* WORKS CATEGORIES */
+.works__categories {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  gap: 16px 10px;
+  max-width: 890px;
+  margin-bottom: 46px;
+}
+
+.works__categories-btn {
+  border: 1px solid #000;
+  border-radius: 100px;
+  height: 44px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 5px 16px;
+  cursor: pointer;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.works__categories-btn:hover {
+  border: 1px solid #00000000;
+  background-color: #fc0;
+}
+
+.works__clear {
+}
+
+.active {
+  background-color: #fc0;
+}
+/* WORKS LIST*/
+
+.works__list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out forwards;
+}
+
+.works__item {
+  position: relative;
+  display: block;
+}
+
+.works__item:hover .works__title {
+  opacity: 1;
+}
+
+.works__img-wrapper {
+  width: 100%;
+  height: 0;
+  padding-bottom: 80%;
+  position: relative;
+  overflow: hidden;
+}
+
+.works__img {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  transition: -webkit-transform 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out, -webkit-transform 0.3s ease-in-out;
+}
+
+.works__item:hover .works__img {
+  scale: 1.1;
+}
+
+.works__title {
+  font-weight: 400;
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  opacity: 0;
+  transition: 0.3s ease;
+}
+
+/* RESPONSIVE */
+
+@media only screen and (min-width: 1921px) {
+  .works__list {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .works__list {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .works__list {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

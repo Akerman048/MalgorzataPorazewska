@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Małgorzata Porażewska | admin</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/admin.css" />
+  </head>
+  <body>
+    <main class="admin-page">
+      <form
+        class="admin__form"
+        action="/login"
+        method="POST"
+        aria-label="Login form"
+      >
+        <h2 class="admin__form-title">Log in</h2>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+        <div id="google-login" class="google-logo__wrap">
+          <img class="google-logo" src="/images/icons/google-logo.svg" /> Log in
+          with google
+        </div>
+        <button type="submit">Log in</button>
+        <button class="admin__back-btn">
+          <a href="/">Back to main page</a>
+        </button>
+        <div id="admin__login-status" class="login-status"></div>
+      </form>
+    </main>
+    <script src="js/firebase-config.js" type="module"></script>
+    <script src="js/admin.js" type="module"></script>
+  </body>
+</html>
