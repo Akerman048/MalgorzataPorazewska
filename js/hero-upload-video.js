@@ -1,4 +1,4 @@
-import { storage, db } from "js/firebase-config.js";
+import { storage, db } from "./firebase-config.js";
 import {
   ref,
   uploadBytes,
