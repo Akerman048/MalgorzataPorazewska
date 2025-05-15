@@ -49,7 +49,7 @@
           >
           <ul class="header__menu">
             <li class="nav__link"><a href="/works.html">works</a></li>
-            <li class="nav__link"><a>about</a></li>
+            <li class="nav__link"><a href="/about.html">about</a></li>
             <li class="nav__link" id="nav__link-contact"><a>contact</a></li>
           </ul>
         </section>
@@ -74,6 +74,16 @@
                   /></svg >Remove all filters
               </button>
             </div>
+            <section class="upload-form">
+              <input type="file" id="uploadImage" multiple />
+              <input type="text" id="uploadTitle" placeholder="Title" />
+              <input type="text" id="uploadYear" placeholder="Year" />
+              <input type="text" id="uploadSlug" placeholder="Slug (unique)" />
+              <input type="text" id="uploadCategory" placeholder="Category" />
+              <textarea id="uploadDescription" placeholder="Description"></textarea>
+              <button id="uploadWorkBtn">Upload Work</button>
+            </section>
+            
             <div class="works__list" id="works__list">
               
               
@@ -115,6 +125,7 @@
       </footer>
     </div>
     <script type="module" src="js/works.js"></script>
+    <script type="module" src="js/works-add.js"></script>
     <script type="module" src="/js/script.js"></script>
   </body>
 </html>

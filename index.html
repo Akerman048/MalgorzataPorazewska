@@ -24,7 +24,7 @@
       <span class="header__name">Małgorzata Porażewska</span>
       <ul class="header__menu">
         <li class="nav__link"><a href="/works.html">works</a></li>
-        <li class="nav__link"><a>about</a></li>
+        <li class="nav__link"><a href="/about.html">about</a></li>
         <li class="nav__link" id="nav__link-contact"><a>contact</a></li>
       </ul>
     </section>
@@ -62,10 +62,14 @@
     </section>
     <main>
       <section class="hero">
-        <video class="hero__video" autoplay muted loop>
-          <source src="/images/testvideo.MOV" type="video/mp4" />
+        <video id="heroVideo" class="hero__video" autoplay muted loop>
+          <source id="heroSource" src="" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+        <div class="hero-video__upload-controls">
+          <input type="file" id="videoUploadInput" accept="video/mp4"/>
+          <button id="uploadVideoBtn">Upload new video</button>
+        </div>
       </section>
 
       <section class="shapes shapes-container container">
@@ -135,37 +139,19 @@
 
       <section class="slider-block">
         <h2 class="slider__heading">works</h2>
+        <button id="slider__upload-btn">Add to slider</button>
+        <div id="slider-upload-modal" class="slider-upload-modal">
+          
+
+          <input type="file" id="slider-modal-file" />
+          <input type="text" id="slider-modal-link" placeholder="Enter link" />
+          <input type="text" id="slider-modal-title" placeholder="Enter title" />
+          <button id="slider-modal-submit">Upload</button>
+          <button id="slider-modal-cancel">Cancel</button>
+        </div>
         <div class="swiper mySwiper">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <div>
-                <img src="/images/GODY7253.JPG" /><span
-                  class="swiper__slide-title"
-                  >1</span
-                >
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div>
-                <img src="/images/1.jpg" /><span class="swiper__slide-title"
-                  >2</span
-                >
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div>
-                <img src="/images/2.jpg" /><span class="swiper__slide-title"
-                  >3</span
-                >
-              </div>
-            </div>
-            <div class="swiper-slide">
-              <div>
-                <img src="/images/3.jpg" /><span class="swiper__slide-title"
-                  >4</span
-                >
-              </div>
-            </div>
+          <div id="swiper-block-wrapper" class="swiper-wrapper">
+        
           </div>
           <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div>
@@ -245,24 +231,16 @@
         </ul>
       </section>
       <section class="pictures-slider">
+        
+        <div id="pictures-slider-upload-modal" class="slider-upload-modal">
+          <input type="file" id="pictures-slider-modal-file" />
+          <input type="text" id="pictures-slider-modal-title" placeholder="Enter title" />
+          <button id="pictures-slider-modal-submit">Upload</button>
+        </div>
         <div class="swiper pictures-swiper-slider">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-              <span class="pictures-swiper-descr">description 1</span>
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-              <span class="pictures-swiper-descr">description 2</span>
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-              <span class="pictures-swiper-descr">description 3</span>
-            </div>
-            <div class="swiper-slide">
-              <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-              <span class="pictures-swiper-descr">description 4</span>
-            </div>
+          
+          <div id="pictures-swiper-wrapper" class="swiper-wrapper">
+           
           </div>
           <div class="swiper-button-next"></div>
           <div class="swiper-button-prev"></div>
@@ -271,50 +249,10 @@
 
       <section class="inst-block">
         <h2 class="inst-block__heading">instagram</h2>
-        <ul class="inst-block__grid">
-          <li class="inst-block__item">
-            <a href="www.google.com" class="inst-block__link"
-              ><div class="inst-block__img-wrapper">
-                <img src="/images/1.jpg" />
-              </div>
-            </a>
-          </li>
-          <li class="inst-block__item">
-            <a href="www.google.com" class="inst-block__link"
-              ><div class="inst-block__img-wrapper">
-                <img src="/images/2.jpg" />
-              </div>
-            </a>
-          </li>
-          <li class="inst-block__item">
-            <a href="www.google.com" class="inst-block__link"
-              ><div class="inst-block__img-wrapper">
-                <img src="/images/3.jpg" /></div
-            ></a>
-          </li>
-          <li class="inst-block__item">
-            <a href="www.google.com" class="inst-block__link"
-              ><div class="inst-block__img-wrapper">
-                <img src="/images/3.jpg" /></div
-            ></a>
-          </li>
-          <li class="inst-block__item">
-            <a
-              href="https://www.instagram.com/p/DAzOfFjNXmv/?utm_source=ig_web_button_share_sheet"
-              class="inst-block__link"
-              ><div class="inst-block__img-wrapper">
-                <img
-                  src="https://www.instagram.com/p/DAzOfFjNXmv/?utm_source=ig_web_button_share_sheet"
-                /></div
-            ></a>
-          </li>
-          <li class="inst-block__item">
-            <a href="www.google.com" class="inst-block__link"
-              ><div class="inst-block__img-wrapper">
-                <img src="/images/GODY7253.JPG" /></div
-            ></a>
-          </li>
-        </ul>
+        <input type="file" id="inst__file-upload" />
+        <button id="inst__upload-btn">Upload Image</button>
+
+        <ul class="inst-block__grid"></ul>
       </section>
     </main>
     <footer class="footer">
@@ -350,9 +288,15 @@
         <p class="copyright">Copyright Małgorzata Porażewska</p>
       </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" ></script>
-    <script src="js/swiper.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="js/firebase-config.js" type="module"></script>
+    <script src="js/hero-upload-video.js" type="module"></script>
+    <script src="js/slider-add.js" type="module"></script>
+    <script src="js/slider-delete.js" type="module"></script>
+    <script src="js/pictures-slider-add.js" type="module"></script>
+    <script src="js/pictures-slider-delete.js" type="module"></script>
+    <script src="js/inst-add.js" type="module"></script>
+    <script src="js/inst-delete.js" type="module"></script>
     <script src="js/script.js" type="module"></script>
   </body>
 </html>

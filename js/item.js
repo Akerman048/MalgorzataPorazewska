@@ -65,7 +65,7 @@ async function loadWorkBySlug(slug) {
 
           <div class="item__info-wrapper">
             <h3 class="item__title">${data.title}</h3>
-            <span class="item__year">${data.year}</span>
+            <span class="item__year">year: ${data.year}</span>
             <p class="item__descr">${data.description}</p>
           </div>
         </div>
@@ -84,15 +84,14 @@ async function loadWorkBySlug(slug) {
 
 // Функція для запуску Swiper тільки після вставки HTML
 function initializeSwiper() {
-  const swiperThumbs = new Swiper(".mySwiper", {
+  var swiper = new Swiper(".mySwiper", {
     loop: true,
     spaceBetween: 10,
     slidesPerView: 4,
     freeMode: true,
     watchSlidesProgress: true,
   });
-
-  const swiperMain = new Swiper(".mySwiper2", {
+  var swiper2 = new Swiper(".mySwiper2", {
     loop: true,
     spaceBetween: 10,
     navigation: {
@@ -100,7 +99,7 @@ function initializeSwiper() {
       prevEl: ".swiper-button-prev",
     },
     thumbs: {
-      swiper: swiperThumbs,
+      swiper: swiper,
     },
   });
 }

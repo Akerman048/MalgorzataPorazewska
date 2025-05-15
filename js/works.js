@@ -4,6 +4,8 @@ import {
   getDocs,
   query,
   where,
+  deleteDoc,
+  doc,
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
 const gallery = document.getElementById("works__list");
@@ -45,6 +47,7 @@ async function loadWorks() {
         </div>
         <h3 class="works__title">${data.title}</h3>
       </a>
+      <button class="delete-btn" data-id="${id}">🗑 Delete</button>
     `;
 
     gallery.appendChild(card);
@@ -56,6 +59,7 @@ async function loadWorks() {
   } else {
     clearBtn.style.display = "none";
   }
+  setupDeleteButtons();
 }
 
 // Функція для перемикання категорії
@@ -83,6 +87,25 @@ clearBtn.addEventListener("click", () => {
   categoryButtons.forEach((btn) => btn.classList.remove("active"));
   loadWorks();
 });
+
+function setupDeleteButtons() {
+  document.querySelectorAll(".delete-btn").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const id = btn.dataset.id;
+      const confirmDelete = confirm("Delete this work?");
+      if (!confirmDelete) return;
+
+      try {
+        await deleteDoc(doc(db, "works", id));
+        alert("✅ Deleted");
+        window.loadWorks(); // перезавантаження галереї
+      } catch (err) {
+        console.error(err);
+        alert("❌ Failed to delete");
+      }
+    });
+  });
+}
 
 window.loadWorks = loadWorks;
 loadWorks();
