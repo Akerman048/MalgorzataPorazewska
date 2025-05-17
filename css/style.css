@@ -1,6 +1,7 @@
 .container {
   max-width: 2540px;
-  
+  width: 100%;
+  margin: 0 auto;
   left: 0;
   right: 0;
   padding: 0 46px;
@@ -230,6 +231,27 @@ transform: translateX(-50%);
 
 .selected-works__item {
   min-width: 300px;
+  
+}
+
+.selected-works__img{
+  transition: transform 0.3s ease;
+}
+
+.selected-works__title {
+  padding-left: 0;
+  transition: padding-left 0.3s ease;
+}
+
+
+.selected-works__item:hover .selected-works__img{
+  transform: scale(1.04);
+transition: .3s ease;
+}
+
+.selected-works__item:hover .selected-works__title{
+  padding-left: 10px;
+transition: .3s ease;
 }
 
 .selected-works__img-wrapper {

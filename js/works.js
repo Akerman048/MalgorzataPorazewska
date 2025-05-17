@@ -6,6 +6,7 @@ import {
   where,
   deleteDoc,
   doc,
+  updateDoc,
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
 const gallery = document.getElementById("works__list");
@@ -48,6 +49,9 @@ async function loadWorks() {
         <h3 class="works__title">${data.title}</h3>
       </a>
       <button class="delete-btn" data-id="${id}">🗑 Delete</button>
+      <button class="toggle-selected-btn" data-id="${id}" data-selected="${data.seelcted}">
+  ${data.selected ? "Remove from favorites" : "Add to favorites"}
+</button>
     `;
 
     gallery.appendChild(card);
@@ -60,6 +64,7 @@ async function loadWorks() {
     clearBtn.style.display = "none";
   }
   setupDeleteButtons();
+  setupSelectedButtons();
 }
 
 // Функція для перемикання категорії
@@ -107,5 +112,30 @@ function setupDeleteButtons() {
   });
 }
 
+
+
+function setupSelectedButtons() {
+  document.querySelectorAll(".toggle-selected-btn").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const id = btn.dataset.id;
+      const current = btn.dataset.selected === "true";
+
+      try {
+        await updateDoc(doc(db, "works", id), {
+          selected: !current,
+        });
+        alert("✅ Updated!");
+        loadWorks(); // reload gallery
+      } catch (err) {
+        console.error(err);
+        alert("❌ Failed to update selected status");
+      }
+    });
+  });
+}
+
+
 window.loadWorks = loadWorks;
+
+
 loadWorks();
