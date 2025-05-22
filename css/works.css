@@ -45,6 +45,26 @@
 .active {
   background-color: #fc0;
 }
+
+/* UPLOAD FORM */
+
+#upload-form{
+
+}
+
+#uploadImage,
+#uploadTitle,
+#uploadYear,
+#uploadSlug,
+#uploadCategory,
+#uploadDescription {
+  background-color: #ffcc004e;
+}
+
+#uploadWorkBtn{
+  padding: 2px 4px;
+  background-color: #ffff7e;
+}
 /* WORKS LIST*/
 
 .works__list {
@@ -116,8 +136,20 @@
 }
 
 @media only screen and (max-width: 768px) {
+
+  .works{
+padding-top: 120px;
+  }
+
   .works__list {
     grid-template-columns: 1fr;
     gap: 16px;
+  }
+
+  .upload-form{
+display: flex;
+flex-direction: column;
+gap: 5px;
+margin-bottom: 10px;
   }
 }

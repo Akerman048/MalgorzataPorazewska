@@ -45,6 +45,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   async function loadHeroVideo() {
+
+    const cachedURL = localStorage.getItem("heroVideoURL");
+
+  if (cachedURL) {
+    videoSource.src = cachedURL;
+    videoElement.load();
+  }
+  
     try {
       const videoDoc = await getDoc(doc(db, "hero", "video"));
       if (videoDoc.exists()) {

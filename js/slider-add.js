@@ -105,13 +105,13 @@ async function loadSliderGallery() {
     slide.classList.add("swiper-slide");
 
     slide.innerHTML = `
-      <div>
+      
         <a href="${data.link}" target="_blank">
           <img src="${data.image}" alt="${data.title}" />
         </a>
         <span class="swiper__slide-title">${data.title}</span>
         <span class="swiper__delete slider__delete">delete slide</span>
-      </div>
+      
     `;
     sliderWrapper.appendChild(slide);
   });
