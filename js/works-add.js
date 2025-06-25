@@ -11,7 +11,9 @@ import {
   deleteDoc,
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
+
 const uploadBtn = document.getElementById("uploadWorkBtn");
+
 
 uploadBtn.addEventListener("click", async () => {
   const files = document.getElementById("uploadImage").files;
@@ -25,7 +27,7 @@ uploadBtn.addEventListener("click", async () => {
     alert("Please fill all required fields and select images.");
     return;
   }
- 
+
   try {
     const imageUrls = [];
 
@@ -53,5 +55,3 @@ uploadBtn.addEventListener("click", async () => {
     alert("❌ Failed to upload.");
   }
 });
-
-

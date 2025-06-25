@@ -81,3 +81,11 @@ button:hover {
 .admin__back-btn{
     background-color: #9dcaf9;
 }
+
+.logout{
+  background-color: #b30000a0;
+}
+
+.logout:hover{
+  background-color: #b30000;
+}

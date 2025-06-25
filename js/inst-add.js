@@ -1,4 +1,4 @@
-import { storage, db } from "./firebase-config.js";
+import { storage, db, auth } from "./firebase-config.js";
 import {
   ref,
   uploadBytes,
@@ -42,6 +42,10 @@ async function loadGallery() {
 
   const q = query(collection(db, 'inst_photos'), orderBy('timestamp', 'desc'))
   const querySnapshot = await getDocs(q);
+
+  const user = auth.currentUser; 
+  const isAdmin = user !== null;
+
   querySnapshot.forEach((docSnapshot) => {
     const data = docSnapshot.data();
 
@@ -52,7 +56,7 @@ async function loadGallery() {
           <img src="${data.image}" />
         </div>
       </a>
-      <span class="inst-block__delete"></span>
+      <span style="display: ${isAdmin ? "flex" : "none"}"  class="inst-block__delete"></span>
         `;
 
     container.appendChild(li);

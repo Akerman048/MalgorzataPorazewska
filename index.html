@@ -21,7 +21,7 @@
   </head>
   <body>
     <section class="header container">
-      <span class="header__name">Małgorzata Porażewska</span>
+      <span class="header__name"><a href="/">Małgorzata Porażewska</a></span>
       <ul class="header__menu">
         <li class="nav__link"><a href="/works.html">works</a></li>
         <li class="nav__link"><a href="/about.html">about</a></li>
@@ -34,25 +34,26 @@
           <div class="footer__contact">
             <h3 class="footer__title">Contact</h3>
             <ul>
-              <li><a href="mailto:rtbr@gmail.com">testEmail@gmail.com</a></li>
+              <li class="contact_email"><a href=""></a></li>
+
             </ul>
           </div>
           <div class="footer__studio">
             <h3 class="footer__title">Studio</h3>
             <ul class="footer_column-wrap">
-              <li>Nowowiejska 28 02 010 Warsaw Poland</li>
+              <li class="contact_address"></li>
             </ul>
           </div>
           <div class="footer__follow">
             <h3 class="footer__title">Follow</h3>
             <ul>
-              <li>
+              <li class="contact_inst">
                 <a
                   href="https://www.instagram.com/porazewska/?fbclid=IwY2xjawJ1mc5leHRuA2FlbQIxMABicmlkETF3T1VYWm54UGZkb1ZJTGhlAR6EItBh8FbV_brbqdSlZosWLKqbqUqwdHm0ptabXEPcszcXINYr8bMXzan-7A_aem_6sERrfQygiBIbCXpei6FRw#"
                   >Instagram</a
                 >
               </li>
-              <li>
+              <li class="contact_fb">
                 <a href="https://www.facebook.com/porazewska">Facebook</a>
               </li>
             </ul>
@@ -146,17 +147,23 @@
 
       <section class="slider-block">
         <h2 class="slider__heading">works</h2>
-        <button id="slider__upload-btn">Add to slider</button>
-        <div id="slider-upload-modal" class="slider-upload-modal">
-          <input type="file" id="slider-modal-file" />
-          <input type="text" id="slider-modal-link" placeholder="Enter link" />
-          <input
-            type="text"
-            id="slider-modal-title"
-            placeholder="Enter title"
-          />
-          <button id="slider-modal-submit">Upload</button>
-          <button id="slider-modal-cancel">Cancel</button>
+        <div id="slider__upload-wrap">
+          <button id="slider__upload-btn">Add to slider</button>
+          <div id="slider-upload-modal" class="slider-upload-modal">
+            <input type="file" id="slider-modal-file" />
+            <input
+              type="text"
+              id="slider-modal-link"
+              placeholder="Enter link"
+            />
+            <input
+              type="text"
+              id="slider-modal-title"
+              placeholder="Enter title"
+            />
+            <button id="slider-modal-submit">Upload</button>
+            <button id="slider-modal-cancel">Cancel</button>
+          </div>
         </div>
         <div class="swiper mySwiper">
           <div id="swiper-block-wrapper" class="swiper-wrapper"></div>
@@ -165,9 +172,11 @@
           <div class="swiper-pagination"></div>
         </div>
       </section>
+
       <section class="selected-works">
         <ul class="selected-works__grid container"></ul>
       </section>
+      
       <section class="pictures-slider">
         <div id="pictures-slider-upload-modal" class="slider-upload-modal">
           <input type="file" id="pictures-slider-modal-file" />
@@ -187,9 +196,10 @@
 
       <section class="inst-block">
         <h2 class="inst-block__heading">instagram</h2>
-        <input type="file" id="inst__file-upload" />
-        <button id="inst__upload-btn">Upload Image</button>
-
+        <div id="inst__file-upload-wrap">
+          <input type="file" id="inst__file-upload" />
+          <button id="inst__upload-btn">Upload Image</button>
+        </div>
         <ul class="inst-block__grid"></ul>
       </section>
     </main>
@@ -199,26 +209,27 @@
           <div class="footer__contact">
             <h3 class="footer__title">Contact</h3>
             <ul>
-              <li><a href="mailto:rtbr@gmail.com">testEmail@gmail.com</a></li>
+              <li class="contact_email"><a href=""></a></li>
+
             </ul>
           </div>
           <div class="footer__studio">
             <h3 class="footer__title">Studio</h3>
             <ul class="footer_column-wrap">
-              <li>Nowowiejska 28 02 010 Warsaw Poland</li>
+              <li class="contact_address"></li>
             </ul>
           </div>
           <div class="footer__follow">
             <h3 class="footer__title">Follow</h3>
             <ul>
-              <li>
+              <li class="contact_inst">
                 <a
-                  href="https://www.instagram.com/porazewska/?fbclid=IwY2xjawJ1mc5leHRuA2FlbQIxMABicmlkETF3T1VYWm54UGZkb1ZJTGhlAR6EItBh8FbV_brbqdSlZosWLKqbqUqwdHm0ptabXEPcszcXINYr8bMXzan-7A_aem_6sERrfQygiBIbCXpei6FRw#"
+                  href=""
                   >Instagram</a
                 >
               </li>
-              <li>
-                <a href="https://www.facebook.com/porazewska">Facebook</a>
+              <li class="contact_fb">
+                <a href="">Facebook</a>
               </li>
             </ul>
           </div>
@@ -236,6 +247,7 @@
     <script src="js/inst-add.js" type="module"></script>
     <script src="js/inst-delete.js" type="module"></script>
     <script src="js/selected-works.js" type="module"></script>
+    <script src="js/contact.js" type="module"></script>
     <script src="js/script.js" type="module"></script>
   </body>
 </html>

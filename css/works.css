@@ -48,8 +48,8 @@
 
 /* UPLOAD FORM */
 
-#upload-form{
-
+.upload-form{
+display: none;
 }
 
 #uploadImage,

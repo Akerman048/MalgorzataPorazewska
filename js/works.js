@@ -8,6 +8,8 @@ import {
   doc,
   updateDoc,
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+import { auth } from "./firebase-config.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
 const gallery = document.getElementById("works__list");
 const clearBtn = document.querySelector(".works__clear");
@@ -16,6 +18,28 @@ const categoryButtons = document.querySelectorAll(
 );
 
 let selectedCategories = [];
+let isLoggedIn = false;
+
+onAuthStateChanged(auth, (user) => {
+  isLoggedIn = !!user;
+
+  if (user) {
+    console.log("User is logged in:", user.email);
+    document.querySelector(".upload-form").style.display = "block";
+    
+      document.querySelectorAll(".delete-btn").forEach((el) => (el.style.display = "block"));
+    document.querySelectorAll(".toggle-selected-btn").forEach((el) => (el.style.display = "block"));
+
+     
+    
+  } else {
+    console.log("No user is logged in");
+    document.querySelector(".upload-form").style.display = "none";
+    document.querySelectorAll(".delete-btn").forEach((el) => (el.style.display = "none"));
+    document.querySelectorAll(".toggle-selected-btn").forEach((el) => (el.style.display = "none"));
+    
+  } loadWorks();
+});
 
 async function loadWorks() {
   gallery.innerHTML = "Loading...";
@@ -48,10 +72,9 @@ async function loadWorks() {
         </div>
         <h3 class="works__title">${data.title}</h3>
       </a>
-      <button class="delete-btn" data-id="${id}">🗑 Delete</button>
-      <button class="toggle-selected-btn" data-id="${id}" data-selected="${data.seelcted}">
-  ${data.selected ? "Remove from favorites" : "Add to favorites"}
-</button>
+      ${isLoggedIn ? `<button class="delete-btn" data-id="${id}">🗑 Delete</button>` : ""}
+      ${isLoggedIn ? `<button class="toggle-selected-btn" data-id="${id}" data-selected="${data.selected}">
+        ${data.selected ? "Remove from favorites" : "Add to favorites"}</button>` : ""}
     `;
 
     gallery.appendChild(card);
@@ -133,6 +156,11 @@ function setupSelectedButtons() {
     });
   });
 }
+
+
+
+
+
 
 
 window.loadWorks = loadWorks;
