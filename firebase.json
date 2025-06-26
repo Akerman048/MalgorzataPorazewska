@@ -7,10 +7,8 @@
       "**/node_modules/**"
     ],
     "rewrites": [
-      {
-        "source": "/__/firebase/**",
-        "destination": "/__/firebase/index.html"
-      }
+      { "source": "**", "destination": "/index.html" }
     ]
   }
+  
 }
