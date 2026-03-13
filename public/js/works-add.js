@@ -11,16 +11,18 @@ import {
   deleteDoc,
 } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-
 const uploadBtn = document.getElementById("uploadWorkBtn");
-
+const loader = document.getElementById("upload_loader");
 
 uploadBtn.addEventListener("click", async () => {
   const files = document.getElementById("uploadImage").files;
   const title = document.getElementById("uploadTitle").value.trim();
   const year = document.getElementById("uploadYear").value.trim();
   const slug = document.getElementById("uploadSlug").value.trim();
-  const category = document.getElementById("uploadCategory").value.trim();
+  const categoryRadio = document.querySelector(
+    'input[name="uploadCategory"]:checked'
+  );
+  const category = categoryRadio ? categoryRadio.value : "";
   const description = document.getElementById("uploadDescription").value.trim();
 
   if (!files.length || !title || !slug || !category) {
@@ -29,6 +31,8 @@ uploadBtn.addEventListener("click", async () => {
   }
 
   try {
+    loader.classList.remove("hidden");
+
     const imageUrls = [];
 
     for (let file of files) {
@@ -49,9 +53,11 @@ uploadBtn.addEventListener("click", async () => {
     });
 
     alert("✅ Work uploaded!");
-    window.loadWorks(); // reload gallery
+    window.loadWorks(); 
   } catch (err) {
     console.error(err);
     alert("❌ Failed to upload.");
+  } finally {
+    loader.classList.add("hidden"); // 👈 ховаємо спінер
   }
 });

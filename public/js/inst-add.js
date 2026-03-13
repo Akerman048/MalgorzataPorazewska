@@ -53,7 +53,7 @@ async function loadGallery() {
     li.classList.add("inst-block__item");
     li.innerHTML = ` <a href="${data.link}" class="inst-block__link" target="_blank">
         <div class="inst-block__img-wrapper">
-          <img src="${data.image}" />
+          <img src="${data.image}" loading="lazy"/>
         </div>
       </a>
       <span style="display: ${isAdmin ? "flex" : "none"}"  class="inst-block__delete"></span>

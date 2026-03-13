@@ -27,6 +27,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .swiper-slide img {
@@ -35,6 +36,15 @@
   height: 100%;
   object-fit: contain;
   background-color: transparent;
+}
+
+.delete-image-btn {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  font-size: 16px;
+  background-color: #ffec72;
+  padding: 5px;
 }
 
 .swiper {
@@ -75,7 +85,6 @@
 
 .mySwiper .swiper-slide-thumb-active {
   opacity: 1;
-  
 }
 
 .item__img-wrapper,
@@ -84,14 +93,16 @@
   flex-shrink: 0;
 }
 
-.swiper-button-next, .swiper-button-prev{
+.swiper-button-next,
+.swiper-button-prev {
   color: black;
   padding: 10px;
 }
 
-.swiper-button-next::after, .swiper-button-prev::after{
-font-size: 16px;
-font-weight: 700;
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 16px;
+  font-weight: 700;
 }
 
 /* INFO */
@@ -121,27 +132,25 @@ font-weight: 700;
   font-weight: 400;
 }
 
-
-
 @media screen and (max-width: 769px) {
-  .item{
-   flex-direction: column;
+  .item {
+    flex-direction: column;
   }
 
-  .item__img-wrapper{
+  .item__img-wrapper {
     max-width: 100%;
     width: 100%;
   }
 
-  .item__info-wrapper{
+  .item__info-wrapper {
     max-width: 100%;
   }
 
-  .mySwiper{
+  .mySwiper {
     height: 160px;
   }
 
-  .item__title{
+  .item__title {
     font-size: 2em;
   }
 }

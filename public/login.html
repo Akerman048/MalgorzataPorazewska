@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -7,8 +7,11 @@
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/login.css" />
+    <link rel="stylesheet" href="css/typography.css" />
   </head>
   <body>
+    <script src="js/typography.js" type="module"></script>
+
     <main class="admin-page">
       <form
         class="admin__form"
@@ -34,8 +37,182 @@
         </button>
         <div id="admin__login-status" class="login-status"></div>
       </form>
+      
+      <div id="color-settings" class="admin-card" style="margin-top: 20px">
+        <h3>🎨 Admin Theme Settings</h3>
+        <label for="bodyColor">Body text color:</label>
+        <input type="color" id="bodyColor" name="bodyColor" />
+
+        <label for="headingColor">Heading/accent color:</label>
+        <input type="color" id="headingColor" name="headingColor" />
+
+        <button type="button" id="save-colors">Save colors</button>
+      </div>
+      <div id="font-settings" class="admin-card" style="margin-top: 20px">
+        <label for="headingFontSelect">Headings font:</label>
+        <select id="headingFontSelect">
+          <option disabled selected>Loading fonts...</option>
+        </select>
+
+        <label for="bodyFontSelect">Body text font:</label>
+        <select id="bodyFontSelect">
+          <option disabled selected>Loading fonts...</option>
+        </select>
+
+        <label for="headerNameFontSelect">Header Name Font:</label>
+        <select id="headerNameFontSelect">
+          <option disabled selected>Loading fonts...</option>
+        </select>
+
+        <button type="button" id="save-fonts">Save fonts</button>
+      </div>
+      <div id="cursor-settings" class="admin-card">
+        <label for="cursorColor">Cursor color:</label>
+        <input type="color" id="cursorColor" name="cursorColor" />
+        <button id="save-cursor">Save cursor</button>
+      </div>
+      <div id="backgroungColor-settings" class="admin-card" style="margin-top: 20px">
+        <label for="mainBackGroundColor">Background color:</label>
+        <input
+          type="color"
+          id="mainBackGroundColor"
+          name="mainBackGroundColor"
+        />
+
+        <label for="accentBackGroundColor">Accent background color:</label>
+        <input
+          type="color"
+          id="accentBackGroundColor"
+          name="accentBackGroundColor"
+        />
+
+        <button type="button" id="save-backgroundColors">Save colors</button>
+      </div>
+
+      <div id="contactModalColorControls" class="admin-card">
+        <label for="contactModalColor">Contact Modal Background:</label>
+        <input type="color" id="contactModalColor" />
+        <button id="saveContactModalColor">Save</button>
+      </div>
+
+      <!-- Typography Settings Button (Visible for Admins Only) -->
+      <button id="openTypographySettings" style="display: none">
+        🛠 Typography Editor
+      </button>
+
+      <!-- Typography Modal -->
+      <div id="typographyModal" class="typography-modal hidden">
+        <div class="typography-modal__content">
+          <h3>Typography Settings</h3>
+
+          <!-- Element Selection -->
+          <label for="elementSelect">Select Element</label>
+          <select id="elementSelect">
+            <option value="headerName">Header Name</option>
+            <option value="navLink">Nav Link</option>
+            <option value="contactTitle">Contact Title</option>
+            <option value="footerTitle">Footer Title</option>
+            <option value="shapesHeading">Shapes Heading</option>
+            <option value="homeCategoryLabel">Home Category Label</option>
+            <option value="worksCategoryLabel">Works Category Label</option>
+            <option value="sliderHeading">Slider Heading</option>
+            <option value="selectedWorks">Selected Works Title</option>
+            <option value="instHeading">Instagram Heading</option>
+            <option value="smallHeading">Small Headings (h6)</option>
+            <option value="aboutText">About Text</option>
+            <option value="itemTitle">Work Item Title</option>
+            <option value="itemYear">Work Item Year</option>
+            <option value="itemDescription">Work Item Description</option>
+          </select>
+
+          <!-- Desktop Styles -->
+          <h4>Desktop Styles</h4>
+          <label for="fontStyle">Font Style</label>
+          <select id="fontStyle">
+            <option value="normal">Normal</option>
+            <option value="italic">Italic</option>
+          </select>
+
+          <label for="fontWeight">Font Weight</label>
+          <input type="number" id="fontWeight" min="100" max="900" step="100" />
+
+          <label for="fontSize">Font Size (px)</label>
+          <input type="number" id="fontSize" min="10" max="100" step="1" />
+
+          <label for="lineHeight">Line Height (px)</label>
+          <input type="number" id="lineHeight" min="10" max="200" step="1" />
+
+          <label for="letterSpacing">Letter Spacing (px)</label>
+          <input
+            type="number"
+            id="letterSpacing"
+            step="0.1"
+            id="letterSpacing"
+          />
+          <label for="fontFamilySelect">Font Family (Desktop)</label>
+<select id="fontFamilySelect">
+  <option disabled selected>Loading fonts...</option>
+</select>
+
+          <label for="fontColor">Text Color</label>
+<input type="color" id="fontColor" />
+
+          <!-- Mobile Styles -->
+          <h4>Mobile Styles (<=768px)</h4>
+          <label for="mobileFontStyle">Font Style</label>
+          <select id="mobileFontStyle">
+            <option value="normal">Normal</option>
+            <option value="italic">Italic</option>
+          </select>
+
+          <label for="mobileFontWeight">Font Weight</label>
+          <input
+            type="number"
+            id="mobileFontWeight"
+            min="100"
+            max="900"
+            step="100"
+          />
+
+          <label for="mobileFontSize">Font Size (px)</label>
+          <input
+            type="number"
+            id="mobileFontSize"
+            min="10"
+            max="100"
+            step="1"
+          />
+
+          <label for="mobileLineHeight">Line Height (px)</label>
+          <input
+            type="number"
+            id="mobileLineHeight"
+            min="10"
+            max="200"
+            step="1"
+          />
+
+          <label for="mobileLetterSpacing">Letter Spacing (px)</label>
+          <input type="number" id="mobileLetterSpacing" step="0.1" />
+
+          <label for="mobileFontFamilySelect">Font Family (Mobile)</label>
+<select id="mobileFontFamilySelect">
+  <option disabled selected>Loading fonts...</option>
+</select>
+
+          <label for="mobileFontColor">Mobile Text Color</label>
+<input type="color" id="mobileFontColor" />
+
+          <!-- Buttons -->
+          <div class="modal-buttons">
+            <button id="saveTypography">Save</button>
+            <button id="closeTypographyModal">Cancel</button>
+          </div>
+        </div>
+      </div>
     </main>
     <script src="js/firebase-config.js" type="module"></script>
+    <script src="js/theme.js" type="module"></script>
     <script src="js/login.js" type="module"></script>
   </body>
 </html>

@@ -1,0 +1,96 @@
+.typography-loading {
+  visibility: hidden;
+}
+
+#openTypographySettings {
+  position: relative;
+  width: 200px;
+  background-color: rgb(0, 136, 255);
+  padding: 10px 20px;
+  border-radius: 20px;
+  z-index: 9999;
+  transition: 0.3s;
+}
+
+#openTypographySettings:hover {
+  background-color: rgb(0, 100, 188);
+}
+
+.typography-modal.hidden {
+  display: none;
+}
+.typography-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  z-index: 99999;
+  width: 90%;
+  max-width: 400px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+.typography-modal__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.typography-modal__content h3,
+.typography-modal__content h4 {
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+
+.typography-modal__content select,
+.typography-modal__content input{
+border-bottom: 1px solid rgba(128, 128, 128, 0.296);
+}
+
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+#saveTypography{
+  padding: 5px 10px;
+  background-color: rgb(3, 131, 236);
+  border-radius: 5px;
+  transition: .3s;
+}
+
+#saveTypography:hover{
+  background-color: rgb(2, 64, 209);
+  
+}
+
+
+#closeTypographyModal{
+  padding: 5px 10px;
+  background-color: #ff9f9f;
+  border-radius: 5px;
+  transition: .3s;
+}
+
+#closeTypographyModal:hover{
+  background-color: #800505;
+  
+}
+
+/* @media screen and (max-width: 768px) {
+  #openTypographySettings {
+    right: 35px;
+    bottom: 35px;
+    background-color: rgba(240, 248, 255, 0.375);
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+} */

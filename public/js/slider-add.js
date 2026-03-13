@@ -25,6 +25,7 @@ const sliderWrapper = document.getElementById("swiper-block-wrapper");
 
 function initializeSwiper() {
     new Swiper(".mySwiper", {
+      // autoHeight: true,
       effect: "fade",
       loop: true,
       autoplay: {
@@ -107,7 +108,7 @@ async function loadSliderGallery() {
     slide.innerHTML = `
       
         <a href="${data.link}" target="_blank">
-          <img src="${data.image}" alt="${data.title}" />
+          <img src="${data.image}" alt="${data.title}" loading="lazy"/>
         </a>
         <span class="swiper__slide-title">${data.title}</span>
         <span class="swiper__delete slider__delete">delete slide</span>

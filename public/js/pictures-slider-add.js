@@ -85,7 +85,7 @@ async function loadPicturesSliderGallery() {
       const slide = document.createElement("div");
       slide.classList.add("swiper-slide");
       slide.innerHTML = `
-        <img src="${data.image}" alt="${data.title}" />
+        <img src="${data.image}" alt="${data.title}" loading="lazy"/>
         <span class="pictures-swiper-descr">${data.title}</span>
         <span class="swiper__delete pictures-slider-delete">delete slide</span>
       `;

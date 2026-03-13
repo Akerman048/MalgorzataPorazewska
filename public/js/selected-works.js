@@ -25,9 +25,9 @@ async function loadSelectedWorks() {
       const li = document.createElement("li");
       li.classList.add("selected-works__item");
       li.innerHTML = `
-      <a href="/item.html?slug=${data.slug}" class="selected-works__link">
+      <a href="item.html?slug=${data.slug}" class="selected-works__link">
         <div class="selected-works__img-wrapper">
-          <img class="selected-works__img" src="${data.images?.[0]}" alt="${data.title}" />
+          <img class="selected-works__img" src="${data.images?.[0]}" alt="${data.title}" loading="lazy"/>
         </div>
         <span class="selected-works__title">${data.title}</span>
       </a>

@@ -90,3 +90,34 @@ div.swiper-pagination.swiper-pagination-fraction.swiper-pagination-horizontal {
   color: #fff;
   font-weight: 500;
 }
+
+@media screen and (max-width: 768px) {
+  .swiper {
+    width: 100%;
+    height: auto;
+  }
+
+  .swiper-slide {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;  /* центрує по горизонталі */
+    align-items: center;      /* центрує по вертикалі */
+    position: relative;
+    text-align: center;
+    
+  }
+
+  .swiper-slide img {
+    max-width: 100%;
+    max-height: 270px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;  /* додатково гарантує центрування */
+    
+  }
+
+  
+}
