@@ -6,23 +6,20 @@
       "**/.*",
       "**/node_modules/**"
     ],
-    "redirects": [
-      {
-        "source": "/works",
-        "destination": "/works.html",
-        "type": 301
-      },
-      {
-        "source": "/about",
-        "destination": "/about.html",
-        "type": 301
-      },
-      {
-        "source": "/login",
-        "destination": "/login.html",
-        "type": 301
-      }
-    ],
+    "rewrites": [
+  {
+    "source": "/works",
+    "destination": "/works.html"
+  },
+  {
+    "source": "/about",
+    "destination": "/about.html"
+  },
+  {
+    "source": "/login",
+    "destination": "/login.html"
+  }
+],
     "headers": [
       {
         "source": "/css/**",
