@@ -191,12 +191,33 @@ elementSelect.addEventListener("change", async () => {
   fillTypographyForm(settings);
 });
 
+function loadGoogleFont(fontFamily) {
+  if (!fontFamily) return;
+
+  const cleanFont = fontFamily.replace(/['"]/g, "").trim();
+  if (!cleanFont) return;
+
+  const formatted = cleanFont.replace(/ /g, "+");
+  const linkId = `google-font-typography-${formatted}`;
+
+  if (document.getElementById(linkId)) return;
+
+  const link = document.createElement("link");
+  link.id = linkId;
+  link.rel = "stylesheet";
+  link.href = `https://fonts.googleapis.com/css2?family=${formatted}&display=swap`;
+  document.head.appendChild(link);
+}
+
 function applyTypography(key, settings) {
   const targets = ELEMENT_MAP[key] || [];
 
   const applyToElements = (style) => {
     targets.forEach((selector) => {
       document.querySelectorAll(selector).forEach((el) => {
+        if (style.fontFamily) {
+  loadGoogleFont(style.fontFamily);
+}
         el.style.fontStyle = style.fontStyle || "";
         el.style.fontWeight = style.fontWeight || "";
         el.style.fontSize = style.fontSize ? `${style.fontSize}px` : "";
