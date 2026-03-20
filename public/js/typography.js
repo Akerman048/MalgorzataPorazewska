@@ -54,20 +54,6 @@ Object.values(ELEMENT_MAP)
     });
   });
 
-// Show button for admin only
-onAuthStateChanged(auth, async (user) => {
-  if (user) {
-    openBtn.style.display = "inline-block";
-
-    await loadTypographyFontOptions();
-
-    const docSnap = await getDoc(doc(db, "siteSettings", "typography"));
-    const typography = docSnap.exists() ? docSnap.data() : {};
-
-    applyAllTypography(typography);
-  }
-});
-
 function getDefaultTypographySettings() {
   return {
     desktop: {
@@ -105,91 +91,121 @@ function fillTypographyForm(settings = {}) {
     },
   };
 
-  fontStyleInput.value = merged.desktop.fontStyle;
-  fontWeightInput.value = merged.desktop.fontWeight;
-  fontSizeInput.value = merged.desktop.fontSize;
-  lineHeightInput.value = merged.desktop.lineHeight;
-  letterSpacingInput.value = merged.desktop.letterSpacing;
-  fontFamilyInput.value = merged.desktop.fontFamily;
-  fontColorInput.value = merged.desktop.fontColor;
+  if (fontStyleInput) fontStyleInput.value = merged.desktop.fontStyle;
+  if (fontWeightInput) fontWeightInput.value = merged.desktop.fontWeight;
+  if (fontSizeInput) fontSizeInput.value = merged.desktop.fontSize;
+  if (lineHeightInput) lineHeightInput.value = merged.desktop.lineHeight;
+  if (letterSpacingInput) letterSpacingInput.value = merged.desktop.letterSpacing;
+  if (fontFamilyInput) fontFamilyInput.value = merged.desktop.fontFamily;
+  if (fontColorInput) fontColorInput.value = merged.desktop.fontColor;
 
-  mobileFontStyle.value = merged.mobile.fontStyle;
-  mobileFontWeight.value = merged.mobile.fontWeight;
-  mobileFontSize.value = merged.mobile.fontSize;
-  mobileLineHeight.value = merged.mobile.lineHeight;
-  mobileLetterSpacing.value = merged.mobile.letterSpacing;
-  mobileFontFamilyInput.value = merged.mobile.fontFamily;
-  mobileFontColorInput.value = merged.mobile.fontColor;
+  if (mobileFontStyle) mobileFontStyle.value = merged.mobile.fontStyle;
+  if (mobileFontWeight) mobileFontWeight.value = merged.mobile.fontWeight;
+  if (mobileFontSize) mobileFontSize.value = merged.mobile.fontSize;
+  if (mobileLineHeight) mobileLineHeight.value = merged.mobile.lineHeight;
+  if (mobileLetterSpacing) mobileLetterSpacing.value = merged.mobile.letterSpacing;
+  if (mobileFontFamilyInput) mobileFontFamilyInput.value = merged.mobile.fontFamily;
+  if (mobileFontColorInput) mobileFontColorInput.value = merged.mobile.fontColor;
 }
 
-openBtn.addEventListener("click", async () => {
-  modal.classList.remove("hidden");
-
-  const selectedKey = elementSelect.value;
+async function loadAndApplyTypography() {
   const docSnap = await getDoc(doc(db, "siteSettings", "typography"));
   const typography = docSnap.exists() ? docSnap.data() : {};
-  const settings = typography[selectedKey] || {};
+  applyAllTypography(typography);
+  return typography;
+}
 
-  fillTypographyForm(settings);
+// Показуємо кнопку тільки адміну,
+// але самі стилі застосовуємо для ВСІХ
+onAuthStateChanged(auth, async (user) => {
+  if (user && openBtn) {
+    openBtn.style.display = "inline-block";
+    await loadTypographyFontOptions();
+  } else if (openBtn) {
+    openBtn.style.display = "none";
+  }
+
+  await loadAndApplyTypography();
 });
 
-closeBtn.addEventListener("click", () => {
-  modal.classList.add("hidden");
-});
+if (openBtn) {
+  openBtn.addEventListener("click", async () => {
+    if (modal) modal.classList.remove("hidden");
 
-saveBtn.addEventListener("click", async () => {
-  const key = elementSelect.value;
-  const ref = doc(db, "siteSettings", "typography");
+    const selectedKey = elementSelect?.value;
+    const docSnap = await getDoc(doc(db, "siteSettings", "typography"));
+    const typography = docSnap.exists() ? docSnap.data() : {};
+    const settings = typography[selectedKey] || {};
 
-  const docSnap = await getDoc(ref);
-  const existingData = docSnap.exists() ? docSnap.data() : {};
-  const currentSettings = existingData[key] || getDefaultTypographySettings();
+    fillTypographyForm(settings);
+  });
+}
 
-  const newSettings = {
-    desktop: {
-      ...getDefaultTypographySettings().desktop,
-      ...(currentSettings.desktop || {}),
-      fontStyle: fontStyleInput.value,
-      fontWeight: fontWeightInput.value,
-      fontSize: fontSizeInput.value,
-      lineHeight: lineHeightInput.value,
-      letterSpacing: letterSpacingInput.value,
-      fontFamily: fontFamilyInput.value,
-      fontColor: fontColorInput.value,
-    },
-    mobile: {
-      ...getDefaultTypographySettings().mobile,
-      ...(currentSettings.mobile || {}),
-      fontStyle: mobileFontStyle.value,
-      fontWeight: mobileFontWeight.value,
-      fontSize: mobileFontSize.value,
-      lineHeight: mobileLineHeight.value,
-      letterSpacing: mobileLetterSpacing.value,
-      fontFamily: mobileFontFamilyInput.value,
-      fontColor: mobileFontColorInput.value,
-    },
-  };
+if (closeBtn) {
+  closeBtn.addEventListener("click", () => {
+    if (modal) modal.classList.add("hidden");
+  });
+}
 
-  await setDoc(
-    ref,
-    {
-      [key]: newSettings,
-    },
-    { merge: true },
-  );
+if (saveBtn) {
+  saveBtn.addEventListener("click", async () => {
+    const key = elementSelect?.value;
+    if (!key) return;
 
-  applyTypography(key, newSettings);
-  alert("✅ Typography settings saved!");
-  modal.classList.add("hidden");
-});
+    const ref = doc(db, "siteSettings", "typography");
 
-elementSelect.addEventListener("change", async () => {
-  const docSnap = await getDoc(doc(db, "siteSettings", "typography"));
-  const typography = docSnap.exists() ? docSnap.data() : {};
-  const settings = typography[elementSelect.value] || {};
+    const docSnap = await getDoc(ref);
+    const existingData = docSnap.exists() ? docSnap.data() : {};
+    const currentSettings = existingData[key] || getDefaultTypographySettings();
 
-  fillTypographyForm(settings);
-});
+    const newSettings = {
+      desktop: {
+        ...getDefaultTypographySettings().desktop,
+        ...(currentSettings.desktop || {}),
+        fontStyle: fontStyleInput?.value || "normal",
+        fontWeight: fontWeightInput?.value || "400",
+        fontSize: fontSizeInput?.value || "16",
+        lineHeight: lineHeightInput?.value || "1.5",
+        letterSpacing: letterSpacingInput?.value || "0",
+        fontFamily: fontFamilyInput?.value || "",
+        fontColor: fontColorInput?.value || "#000000",
+      },
+      mobile: {
+        ...getDefaultTypographySettings().mobile,
+        ...(currentSettings.mobile || {}),
+        fontStyle: mobileFontStyle?.value || "normal",
+        fontWeight: mobileFontWeight?.value || "400",
+        fontSize: mobileFontSize?.value || "14",
+        lineHeight: mobileLineHeight?.value || "1.4",
+        letterSpacing: mobileLetterSpacing?.value || "0",
+        fontFamily: mobileFontFamilyInput?.value || "",
+        fontColor: mobileFontColorInput?.value || "#000000",
+      },
+    };
+
+    await setDoc(
+      ref,
+      {
+        [key]: newSettings,
+      },
+      { merge: true },
+    );
+
+    applyTypography(key, newSettings);
+    alert("✅ Typography settings saved!");
+    if (modal) modal.classList.add("hidden");
+  });
+}
+
+if (elementSelect) {
+  elementSelect.addEventListener("change", async () => {
+    const docSnap = await getDoc(doc(db, "siteSettings", "typography"));
+    const typography = docSnap.exists() ? docSnap.data() : {};
+    const settings = typography[elementSelect.value] || {};
+
+    fillTypographyForm(settings);
+  });
+}
 
 function loadGoogleFont(fontFamily) {
   if (!fontFamily) return;
@@ -216,13 +232,13 @@ function applyTypography(key, settings) {
     targets.forEach((selector) => {
       document.querySelectorAll(selector).forEach((el) => {
         if (style.fontFamily) {
-  loadGoogleFont(style.fontFamily);
-}
+          loadGoogleFont(style.fontFamily);
+        }
+
         el.style.fontStyle = style.fontStyle || "";
         el.style.fontWeight = style.fontWeight || "";
         el.style.fontSize = style.fontSize ? `${style.fontSize}px` : "";
-        el.style.lineHeight = style.lineHeight ? `${style.lineHeight}px` : "";
-        el.style.letterSpacing = style.letterSpacing
+el.style.lineHeight = style.lineHeight ? `${style.lineHeight}px` : "";        el.style.letterSpacing = style.letterSpacing
           ? `${style.letterSpacing}px`
           : "";
         el.style.fontFamily = style.fontFamily || "";
@@ -296,7 +312,5 @@ setTimeout(() => {
 }, 1000);
 
 document.addEventListener("homeCategoriesRendered", async () => {
-  const docSnap = await getDoc(doc(db, "siteSettings", "typography"));
-  const typography = docSnap.exists() ? docSnap.data() : {};
-  applyAllTypography(typography);
+  await loadAndApplyTypography();
 });

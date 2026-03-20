@@ -68,13 +68,13 @@ div.swiper-pagination.swiper-pagination-fraction.swiper-pagination-horizontal {
 
 .mySwiper .swiper-button-next::after,
 .pictures-swiper-slider .swiper-button-next::after {
-  right: 20px; /* Або змінити з left на right */
-  left: auto; /* Якщо було left: 0 — прибрати */
+  right: 20px; 
+  left: auto; 
 }
 .mySwiper .swiper-button-prev::after,
 .pictures-swiper-slider .swiper-button-prev::after {
-  left: 20px; /* Або змінити з left на right */
-  right: auto; /* Якщо було left: 0 — прибрати */
+  left: 20px; 
+  right: auto;
 }
 
 .swiper-button-next::after,
@@ -101,8 +101,8 @@ div.swiper-pagination.swiper-pagination-fraction.swiper-pagination-horizontal {
     width: 100%;
     height: auto;
     display: flex;
-    justify-content: center;  /* центрує по горизонталі */
-    align-items: center;      /* центрує по вертикалі */
+    justify-content: center; 
+    align-items: center;   
     position: relative;
     text-align: center;
     
@@ -115,7 +115,7 @@ div.swiper-pagination.swiper-pagination-fraction.swiper-pagination-horizontal {
     height: auto;
     object-fit: contain;
     display: block;
-    margin: 0 auto;  /* додатково гарантує центрування */
+    margin: 0 auto; 
     
   }
 

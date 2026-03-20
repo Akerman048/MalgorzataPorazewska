@@ -1,4 +1,3 @@
-/* Default cursor: small black dot */
 body,
 * {
   cursor:
@@ -7,7 +6,6 @@ body,
     auto;
 }
 
-/* Pointer cursor: slightly larger black dot */
 a,
 button,
 [role="button"],
@@ -256,7 +254,7 @@ select {
 .shape {
   width: 100%;
   height: 100%;
-  fill: #bfc0a5; /* Колір як на твоєму зображенні */
+  fill: #bfc0a5;
   transition: transform 0.3s ease;
 }
 
@@ -405,7 +403,7 @@ select {
 }
 
 .selected-works__title {
-  padding-left: 0;
+  margin-top: 10px;
   transition: padding-left 0.3s ease;
 }
 
@@ -414,10 +412,10 @@ select {
   transition: 0.3s ease;
 }
 
-.selected-works__item:hover .selected-works__title {
+/* .selected-works__item:hover .selected-works__title {
   padding-left: 10px;
   transition: 0.3s ease;
-}
+} */
 
 .selected-works__img-wrapper {
   position: relative;
@@ -468,14 +466,14 @@ select {
 
 .inst-block__grid {
   display: flex;
-  flex-wrap: nowrap; /* Щоб всі були в одному рядку */
-  justify-content: space-between; /* Рівномірно розтягнуті */
+  flex-wrap: nowrap;
+  justify-content: space-between;
   width: 100%;
   overflow: hidden;
 }
 
 .inst-block__item {
-  flex: 1 1 0; /* Розтягуються рівномірно */
+  flex: 1 1 0;
   max-width: 100%;
   max-height: 500px;
   position: relative;
@@ -483,7 +481,7 @@ select {
 
 .inst-block__img-wrapper {
   width: 100%;
-  aspect-ratio: 4 / 3; /* або висота через padding-bottom */
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   position: relative;
 }
@@ -745,11 +743,10 @@ select {
     font-weight: 500;
   }
 
-
   .inst-block__grid {
     display: flex;
-    flex-wrap: wrap; /* Щоб всі були в одному рядку */
-    justify-content: space-between; /* Рівномірно розтягнуті */
+    flex-wrap: wrap;
+    justify-content: space-between;
     width: 100%;
     overflow: hidden;
   }
