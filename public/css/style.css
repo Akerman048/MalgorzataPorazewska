@@ -404,7 +404,7 @@ select {
 
 .selected-works__title {
   margin-top: 10px;
-  transition: padding-left 0.3s ease;
+  /* transition: padding-left 0.3s ease; */
 }
 
 .selected-works__item:hover .selected-works__img {
