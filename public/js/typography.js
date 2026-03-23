@@ -34,8 +34,10 @@ const ELEMENT_MAP = {
   contactTitle: [".contact-modal__hero-title"],
   footerTitle: [".footer__title"],
   shapesHeading: ["#shapesTitle"],
-  homeCategoryLabel: [".home-category-label"],
-  worksCategoryLabel: [".works__categories-btn"],
+
+  // categories in shapes section
+  homeCategoryLabel: [".shape-link.home-category-link"],
+
   sliderHeading: [".slider__heading"],
   selectedWorks: [".selected-works__title"],
   instHeading: [".inst-block__heading"],
@@ -64,6 +66,12 @@ function getDefaultTypographySettings() {
       letterSpacing: "0",
       fontFamily: "",
       fontColor: "#000000",
+      containerWidth: "",
+      containerHeight: "",
+      paddingTop: "",
+      paddingRight: "",
+      paddingBottom: "",
+      paddingLeft: "",
     },
     mobile: {
       fontStyle: "normal",
@@ -73,6 +81,12 @@ function getDefaultTypographySettings() {
       letterSpacing: "0",
       fontFamily: "",
       fontColor: "#000000",
+      containerWidth: "",
+      containerHeight: "",
+      paddingTop: "",
+      paddingRight: "",
+      paddingBottom: "",
+      paddingLeft: "",
     },
   };
 }
@@ -235,15 +249,48 @@ function applyTypography(key, settings) {
           loadGoogleFont(style.fontFamily);
         }
 
-        el.style.fontStyle = style.fontStyle || "";
-        el.style.fontWeight = style.fontWeight || "";
-        el.style.fontSize = style.fontSize ? `${style.fontSize}px` : "";
-el.style.lineHeight = style.lineHeight ? `${style.lineHeight}px` : "";        el.style.letterSpacing = style.letterSpacing
+        const isHomeCategory = key === "homeCategoryLabel";
+        const label = isHomeCategory
+          ? el.querySelector(".home-category-label")
+          : el;
+
+        if (!label) return;
+
+        label.style.fontStyle = style.fontStyle || "";
+        label.style.fontWeight = style.fontWeight || "";
+        label.style.fontSize = style.fontSize ? `${style.fontSize}px` : "";
+        label.style.letterSpacing = style.letterSpacing
           ? `${style.letterSpacing}px`
           : "";
-        el.style.fontFamily = style.fontFamily || "";
-        el.style.color = style.fontColor || "";
+        label.style.fontFamily = style.fontFamily || "";
+        label.style.color = style.fontColor || "";
+
+        if (isHomeCategory) {
+          const visualHeight = Number(style.lineHeight) || 160;
+
+          // line-height for text stays neutral
+          label.style.lineHeight = "1.2";
+          label.style.display = "block";
+          label.style.width = "100%";
+          label.style.textAlign = "center";
+
+          // change actual block height
+          el.style.height = `${visualHeight}px`;
+          el.style.minHeight = `${visualHeight}px`;
+          el.style.display = "flex";
+          el.style.alignItems = "center";
+          el.style.justifyContent = "center";
+        } else {
+          label.style.lineHeight = style.lineHeight
+            ? `${style.lineHeight}px`
+            : "";
+
+          el.style.height = "";
+          el.style.minHeight = "";
+        }
+
         el.classList.remove("typography-loading");
+        label.classList.remove("typography-loading");
       });
     });
   };
