@@ -25,6 +25,38 @@ select {
 .admin-inactive {
   display: none;
 }
+
+
+.admin-only {
+  display: none !important;
+}
+
+body.is-admin .admin-only {
+  display: block !important;
+}
+
+body.is-admin .admin-only-flex {
+  display: flex !important;
+}
+
+body.is-admin .admin-only-inline {
+  display: inline-block !important;
+}
+
+.swiper__delete,
+.inst-block__delete {
+  display: none !important;
+}
+
+body.is-admin .swiper__delete {
+  display: block !important;
+}
+
+body.is-admin .inst-block__delete {
+  display: flex !important;
+}
+
+
 .container {
   max-width: 2540px;
   width: 100%;

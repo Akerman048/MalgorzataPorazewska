@@ -154,34 +154,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  onAuthStateChanged(auth, (user) => {
-    const show = (el) => el && (el.style.display = "block");
-    const hide = (el) => el && (el.style.display = "none");
+ onAuthStateChanged(auth, (user) => {
+  document.body.classList.toggle("is-admin", !!user);
 
-    if (user) {
-      console.log("User is logged in:", user.email);
-      show(heroUpload);
-      show(sliderUploadWwrap);
-      show(instFileUploadWrap);
-      show(picturesSliderUploadModal);
+  if (user) {
+    console.log("User is logged in:", user.email);
+  } else {
+    console.log("No user is logged in");
+  }
+});
 
-      setTimeout(() => {
-        document.querySelectorAll(".swiper__delete").forEach(show);
-        document.querySelectorAll(".inst-block__delete").forEach(show);
-      }, 500);
-    } else {
-      console.log("No user is logged in");
-      hide(heroUpload);
-      hide(sliderUploadWwrap);
-      hide(picturesSliderUploadModal);
-      hide(instFileUploadWrap);
 
-      setTimeout(() => {
-        document.querySelectorAll(".swiper__delete").forEach(hide);
-        document.querySelectorAll(".inst-block__delete").forEach(hide);
-      }, 500);
-    }
-  });
+
 });
 
 const faders = document.querySelectorAll(".fade-in");

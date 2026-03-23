@@ -103,7 +103,7 @@
           <source id="heroSource" src="" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        <div class="hero-video__upload-controls">
+        <div class="hero-video__upload-controls admin-only">
           <label for="videoUploadInput" class="upload-label"> Video: </label>
           <input
             type="file"
@@ -123,7 +123,7 @@
 
       <section class="slider-block">
         <h2 class="slider__heading fade-in">works</h2>
-        <div id="slider__upload-wrap">
+        <div id="slider__upload-wrap" class="admin-only">
           <button id="slider__upload-btn">Add to slider</button>
           <div id="slider-upload-modal" class="slider-upload-modal">
             <input type="file" id="slider-modal-file" />
@@ -172,7 +172,7 @@
 
       <section class="inst-block">
         <h2 class="inst-block__heading fade-in">instagram</h2>
-        <div id="inst__file-upload-wrap">
+        <div id="inst__file-upload-wrap" class="admin-only">
           <input type="file" id="inst__file-upload" />
           <button id="inst__upload-btn">Upload Image</button>
         </div>
