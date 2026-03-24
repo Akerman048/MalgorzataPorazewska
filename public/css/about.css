@@ -12,11 +12,17 @@
 }
 
 #aboutbg{
-    z-index: -1;
+    min-height: 100vh;
+    background-color:#797979;
     background-size: cover;
     background-repeat: no-repeat;
-    background-position:center;
+    background-position: center;
+     opacity: 0;
+    transition: opacity 0.35s ease;
+}
 
+#aboutbg.is-ready{
+    opacity: 1;
 }
 
 .about_loader{

@@ -109,7 +109,8 @@ function fillTypographyForm(settings = {}) {
   if (fontWeightInput) fontWeightInput.value = merged.desktop.fontWeight;
   if (fontSizeInput) fontSizeInput.value = merged.desktop.fontSize;
   if (lineHeightInput) lineHeightInput.value = merged.desktop.lineHeight;
-  if (letterSpacingInput) letterSpacingInput.value = merged.desktop.letterSpacing;
+  if (letterSpacingInput)
+    letterSpacingInput.value = merged.desktop.letterSpacing;
   if (fontFamilyInput) fontFamilyInput.value = merged.desktop.fontFamily;
   if (fontColorInput) fontColorInput.value = merged.desktop.fontColor;
 
@@ -117,9 +118,12 @@ function fillTypographyForm(settings = {}) {
   if (mobileFontWeight) mobileFontWeight.value = merged.mobile.fontWeight;
   if (mobileFontSize) mobileFontSize.value = merged.mobile.fontSize;
   if (mobileLineHeight) mobileLineHeight.value = merged.mobile.lineHeight;
-  if (mobileLetterSpacing) mobileLetterSpacing.value = merged.mobile.letterSpacing;
-  if (mobileFontFamilyInput) mobileFontFamilyInput.value = merged.mobile.fontFamily;
-  if (mobileFontColorInput) mobileFontColorInput.value = merged.mobile.fontColor;
+  if (mobileLetterSpacing)
+    mobileLetterSpacing.value = merged.mobile.letterSpacing;
+  if (mobileFontFamilyInput)
+    mobileFontFamilyInput.value = merged.mobile.fontFamily;
+  if (mobileFontColorInput)
+    mobileFontColorInput.value = merged.mobile.fontColor;
 }
 
 async function loadAndApplyTypography() {

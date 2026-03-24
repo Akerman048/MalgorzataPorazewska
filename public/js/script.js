@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const heroUpload = document.querySelector(".hero-video__upload-controls");
   const sliderUploadWwrap = document.getElementById("slider__upload-wrap");
   const picturesSliderUploadModal = document.getElementById(
-    "pictures-slider-upload-modal"
+    "pictures-slider-upload-modal",
   );
   const instFileUploadWrap = document.getElementById("inst__file-upload-wrap");
   const burgerBtn = document.getElementById("burger-btn");
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         const contactModalEmail = document.querySelectorAll(
-          ".contact-modal_email a"
+          ".contact-modal_email a",
         );
         contactModalEmail.forEach((el) => {
           el.href = `mailto:${data.email}`;
@@ -154,18 +154,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
- onAuthStateChanged(auth, (user) => {
-  document.body.classList.toggle("is-admin", !!user);
+  onAuthStateChanged(auth, (user) => {
+    document.body.classList.toggle("is-admin", !!user);
 
-  if (user) {
-    console.log("User is logged in:", user.email);
-  } else {
-    console.log("No user is logged in");
-  }
-});
-
-
-
+    if (user) {
+      console.log("User is logged in:", user.email);
+    } else {
+      console.log("No user is logged in");
+    }
+  });
 });
 
 const faders = document.querySelectorAll(".fade-in");

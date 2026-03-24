@@ -15,29 +15,9 @@ let isLoggedIn = false;
 const loader = document.getElementById("about_loader");
 
 document.addEventListener("DOMContentLoaded", async () => {
-  await loadTitlesData();
-  await loadAboutTitle()
+  await loadAboutTitle();
   await loadAboutBackground();
-  
 });
-
-async function loadTitlesData() {
-  try {
-    const docRef = doc(db, "data", "titles");
-    const docSnap = await getDoc(docRef);
-
-    if (docSnap.exists()) {
-      const data = docSnap.data();
-
-      const aboutTitle = document.getElementById("aboutTitle");
-      aboutTitle.textContent = data.about_title;
-    } else {
-      console.error("Document 'titles' does not exist");
-    }
-  } catch (error) {
-    console.error("Error loading titles data:", error);
-  }
-}
 
 onAuthStateChanged(auth, async (user) => {
   isLoggedIn = !!user;
@@ -66,13 +46,20 @@ uploadBgImgBtn.addEventListener("click", async () => {
     await uploadBytes(storageRef, bgImagefile);
     const url = await getDownloadURL(storageRef);
 
-    aboutbg.style.backgroundImage = `url('${url}')`;
+    const img = new Image();
+    img.onload = () => {
+      aboutbg.style.backgroundImage = `url('${url}')`;
+      aboutbg.classList.add("is-ready");
+    };
+    img.onerror = () => {
+      console.error("Failed to preload uploaded image");
+      aboutbg.classList.add("is-ready");
+    };
+    img.src = url;
 
     await setDoc(
       doc(db, "about", "background"),
-      {
-        url: url,
-      },
+      { url },
       { merge: true }
     );
   } catch (error) {
@@ -84,32 +71,47 @@ uploadBgImgBtn.addEventListener("click", async () => {
 });
 
 async function loadAboutBackground() {
+  const aboutbg = document.getElementById("aboutbg");
+
   try {
     const docRef = doc(db, "about", "background");
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
       const data = docSnap.data();
-      const aboutbg = document.getElementById("aboutbg");
+
       if (data.url) {
-        aboutbg.style.backgroundImage = `url(${data.url})`;
+        const img = new Image();
+
+        img.onload = () => {
+          aboutbg.style.backgroundImage = `url('${data.url}')`;
+          aboutbg.classList.add("is-ready");
+        };
+
+        img.onerror = () => {
+          console.error("Error preloading background image");
+          aboutbg.classList.add("is-ready");
+        };
+
+        img.src = data.url;
       } else {
-        console.warn(
-          "Document 'background' in collection 'about' does not exist."
-        );
+        aboutbg.classList.add("is-ready");
       }
+    } else {
+      aboutbg.classList.add("is-ready");
     }
   } catch (error) {
     console.error("Error loading background image:", error);
+    aboutbg.classList.add("is-ready");
   }
 }
 
 const uploadAboutTitleBtn = document.getElementById("uploadAboutTitleBtn");
 
 uploadAboutTitleBtn.addEventListener("click", async () => {
-  const titleInput = document.getElementById('uploadTitle');
-const title = titleInput.value.trim(); 
-const aboutTitle = document.getElementById("aboutTitle");
+  const titleInput = document.getElementById("uploadTitle");
+  const title = titleInput.value.trim();
+  const aboutTitle = document.getElementById("aboutTitle");
 
   if (!title) {
     alert("Please fill in the text.");
@@ -150,6 +152,6 @@ async function loadAboutTitle() {
       }
     }
   } catch (error) {
-    console.error("Error loading about title:", error)
+    console.error("Error loading about title:", error);
   }
 }

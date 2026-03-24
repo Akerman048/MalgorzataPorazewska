@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Małgorzata Porażewska | Log in</title>
-        <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
 
     <link rel="stylesheet" href="css/reset.css" />
     <link rel="stylesheet" href="css/style.css" />
@@ -39,7 +39,35 @@
         </button>
         <div id="admin__login-status" class="login-status"></div>
       </form>
-      
+
+      <div id="logo-settings" class="admin-card" style="margin-top: 20px">
+        <h3>📝 Logo Text</h3>
+
+        <label for="siteLogoText">Site logo text:</label>
+        <input
+          type="text"
+          id="siteLogoText"
+          placeholder="Małgorzata Porażewska"
+        />
+
+        <button type="button" id="save-logo-text">Save logo text</button>
+      </div>
+
+      <div id="copyright-settings" class="admin-card" style="margin-top: 20px">
+        <h3>© Copyright Text</h3>
+
+        <label for="copyrightText">Copyright text:</label>
+        <input
+          type="text"
+          id="copyrightText"
+          placeholder="Copyright Małgorzata Porażewska"
+        />
+
+        <button type="button" id="save-copyright-text">
+          Save copyright text
+        </button>
+      </div>
+
       <div id="color-settings" class="admin-card" style="margin-top: 20px">
         <h3>🎨 Admin Theme Settings</h3>
         <label for="bodyColor">Body text color:</label>
@@ -73,7 +101,11 @@
         <input type="color" id="cursorColor" name="cursorColor" />
         <button id="save-cursor">Save cursor</button>
       </div>
-      <div id="backgroungColor-settings" class="admin-card" style="margin-top: 20px">
+      <div
+        id="backgroungColor-settings"
+        class="admin-card"
+        style="margin-top: 20px"
+      >
         <label for="mainBackGroundColor">Background color:</label>
         <input
           type="color"
@@ -152,12 +184,12 @@
             id="letterSpacing"
           />
           <label for="fontFamilySelect">Font Family (Desktop)</label>
-<select id="fontFamilySelect">
-  <option disabled selected>Loading fonts...</option>
-</select>
+          <select id="fontFamilySelect">
+            <option disabled selected>Loading fonts...</option>
+          </select>
 
           <label for="fontColor">Text Color</label>
-<input type="color" id="fontColor" />
+          <input type="color" id="fontColor" />
 
           <!-- Mobile Styles -->
           <h4>Mobile Styles (<=768px)</h4>
@@ -198,12 +230,12 @@
           <input type="number" id="mobileLetterSpacing" step="0.1" />
 
           <label for="mobileFontFamilySelect">Font Family (Mobile)</label>
-<select id="mobileFontFamilySelect">
-  <option disabled selected>Loading fonts...</option>
-</select>
+          <select id="mobileFontFamilySelect">
+            <option disabled selected>Loading fonts...</option>
+          </select>
 
           <label for="mobileFontColor">Mobile Text Color</label>
-<input type="color" id="mobileFontColor" />
+          <input type="color" id="mobileFontColor" />
 
           <!-- Buttons -->
           <div class="modal-buttons">

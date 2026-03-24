@@ -18,11 +18,14 @@ onAuthStateChanged(auth, async (user) => {
     loginStatus.textContent = `✅ Welcome back, ${user.displayName}!`;
     loginStatus.style.color = "green";
 
+    document.getElementById("copyright-settings").style.display = "block";
+    document.getElementById("logo-settings").style.display = "block";
     document.getElementById("color-settings").style.display = "block";
     document.getElementById("font-settings").style.display = "block";
     document.getElementById("cursor-settings").style.display = "block";
     document.getElementById("backgroungColor-settings").style.display = "block";
-    document.getElementById("contactModalColorControls").style.display = "block";
+    document.getElementById("contactModalColorControls").style.display =
+      "block";
 
     await loadAllGoogleFonts();
     await loadAdminSettings();
@@ -30,6 +33,8 @@ onAuthStateChanged(auth, async (user) => {
     loginStatus.textContent = "You are not logged in.";
     loginStatus.style.color = "gray";
 
+    document.getElementById("copyright-settings").style.display = "none";
+    document.getElementById("logo-settings").style.display = "none";
     document.getElementById("color-settings").style.display = "none";
     document.getElementById("font-settings").style.display = "none";
     document.getElementById("cursor-settings").style.display = "none";
@@ -37,7 +42,6 @@ onAuthStateChanged(auth, async (user) => {
     document.getElementById("contactModalColorControls").style.display = "none";
   }
 });
-
 
 const loadAllGoogleFonts = async () => {
   const apiKey = "AIzaSyDJ_J7GpMa2nj0dZBgaj8W_NZ99gnha-FY"; // use your real API key
@@ -47,7 +51,7 @@ const loadAllGoogleFonts = async () => {
 
   try {
     const res = await fetch(
-      `https://www.googleapis.com/webfonts/v1/webfonts?key=${apiKey}`
+      `https://www.googleapis.com/webfonts/v1/webfonts?key=${apiKey}`,
     );
     const data = await res.json();
 
@@ -83,10 +87,10 @@ const loadAllGoogleFonts = async () => {
     console.error("❌ Font loading error:", err);
     headingSelect.innerHTML = "<option disabled>Error loading fonts</option>";
     bodySelect.innerHTML = "<option disabled>Error loading fonts</option>";
-    headerNameSelect.innerHTML = "<option disabled>Error loading fonts</option>";
+    headerNameSelect.innerHTML =
+      "<option disabled>Error loading fonts</option>";
   }
 };
-
 
 document.getElementById("google-login").addEventListener("click", () => {
   const loginStatus = document.getElementById("admin__login-status");
@@ -129,22 +133,31 @@ async function loadAdminSettings() {
 
     const data = docSnap.data();
 
+    const copyrightText = document.getElementById("copyrightText");
     const bodyColor = document.getElementById("bodyColor");
     const headingColor = document.getElementById("headingColor");
     const headingFontSelect = document.getElementById("headingFontSelect");
     const bodyFontSelect = document.getElementById("bodyFontSelect");
-    const headerNameFontSelect = document.getElementById("headerNameFontSelect");
+    const headerNameFontSelect = document.getElementById(
+      "headerNameFontSelect",
+    );
     const cursorColor = document.getElementById("cursorColor");
     const mainBackGroundColor = document.getElementById("mainBackGroundColor");
-    const accentBackGroundColor = document.getElementById("accentBackGroundColor");
+    const accentBackGroundColor = document.getElementById(
+      "accentBackGroundColor",
+    );
     const contactModalColor = document.getElementById("contactModalColor");
+    const siteLogoText = document.getElementById("siteLogoText");
 
     if (bodyColor && data.bodyColor) bodyColor.value = data.bodyColor;
-    if (headingColor && data.headingColor) headingColor.value = data.headingColor;
+    if (headingColor && data.headingColor)
+      headingColor.value = data.headingColor;
 
-    if (headingFontSelect && data.headingFont) headingFontSelect.value = data.headingFont;
+    if (headingFontSelect && data.headingFont)
+      headingFontSelect.value = data.headingFont;
     if (bodyFontSelect && data.bodyFont) bodyFontSelect.value = data.bodyFont;
-    if (headerNameFontSelect && data.headerNameFont) headerNameFontSelect.value = data.headerNameFont;
+    if (headerNameFontSelect && data.headerNameFont)
+      headerNameFontSelect.value = data.headerNameFont;
 
     if (cursorColor && data.cursorColor) cursorColor.value = data.cursorColor;
     if (mainBackGroundColor && data.mainBackGroundColor) {
@@ -156,10 +169,68 @@ async function loadAdminSettings() {
     if (contactModalColor && data.contactModalColor) {
       contactModalColor.value = data.contactModalColor;
     }
+
+    if (siteLogoText) {
+      siteLogoText.value = data.siteLogoText || "";
+    }
+
+    if (copyrightText) {
+      copyrightText.value = data.copyrightText || "";
+    }
   } catch (err) {
     console.error("❌ Failed to load admin settings:", err);
   }
 }
+
+document
+  .getElementById("save-copyright-text")
+  .addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    try {
+      const copyrightText = document
+        .getElementById("copyrightText")
+        .value.trim();
+
+      await setDoc(
+        doc(db, "siteSettings", "theme"),
+        { copyrightText },
+        { merge: true },
+      );
+
+      alert("✅ Copyright text saved!");
+      await applyThemeSettings();
+    } catch (err) {
+      console.error("❌ Error saving copyright text:", err);
+      alert("❌ Failed to save copyright text");
+    }
+  });
+
+document
+  .getElementById("save-logo-text")
+  .addEventListener("click", async (e) => {
+    e.preventDefault();
+
+    try {
+      const siteLogoText = document.getElementById("siteLogoText").value.trim();
+
+      console.log("Saving logo text:", siteLogoText);
+
+      await setDoc(
+        doc(db, "siteSettings", "theme"),
+        { siteLogoText },
+        { merge: true },
+      );
+
+      console.log("Logo text saved successfully");
+      alert("✅ Logo text saved!");
+
+      await applyThemeSettings();
+    } catch (err) {
+      console.error("❌ Error saving logo text:", err);
+      alert("❌ Failed to save logo text. Check console.");
+    }
+  });
 
 document.getElementById("save-cursor").addEventListener("click", async () => {
   const cursorColor = document.getElementById("cursorColor").value;
@@ -167,39 +238,48 @@ document.getElementById("save-cursor").addEventListener("click", async () => {
   await setDoc(
     doc(db, "siteSettings", "theme"),
     { cursorColor },
-    { merge: true }
+    { merge: true },
   );
 
   alert("✅ Cursor color saved!");
 });
 
-document.getElementById("save-backgroundColors").addEventListener("click", async () => {
-  const mainBackGroundColor = document.getElementById("mainBackGroundColor").value;
-  const accentBackGroundColor = document.getElementById("accentBackGroundColor").value;
+document
+  .getElementById("save-backgroundColors")
+  .addEventListener("click", async () => {
+    const mainBackGroundColor = document.getElementById(
+      "mainBackGroundColor",
+    ).value;
+    const accentBackGroundColor = document.getElementById(
+      "accentBackGroundColor",
+    ).value;
 
-  await setDoc(
-    doc(db, "siteSettings", "theme"),
-    {
-      mainBackGroundColor,
-      accentBackGroundColor,
-    },
-    { merge: true }
-  );
+    await setDoc(
+      doc(db, "siteSettings", "theme"),
+      {
+        mainBackGroundColor,
+        accentBackGroundColor,
+      },
+      { merge: true },
+    );
 
-  alert("✅ Background colors saved!");
-});
+    alert("✅ Background colors saved!");
+  });
 
-document.getElementById("saveContactModalColor").addEventListener("click", async () => {
-  const contactModalColor = document.getElementById("contactModalColor").value;
+document
+  .getElementById("saveContactModalColor")
+  .addEventListener("click", async () => {
+    const contactModalColor =
+      document.getElementById("contactModalColor").value;
 
-  await setDoc(
-    doc(db, "siteSettings", "theme"),
-    { contactModalColor },
-    { merge: true }
-  );
+    await setDoc(
+      doc(db, "siteSettings", "theme"),
+      { contactModalColor },
+      { merge: true },
+    );
 
-  alert("✅ Contact modal color saved!");
-});
+    alert("✅ Contact modal color saved!");
+  });
 
 document.getElementById("save-colors").addEventListener("click", async () => {
   const bodyColor = document.getElementById("bodyColor").value;
@@ -211,7 +291,7 @@ document.getElementById("save-colors").addEventListener("click", async () => {
       bodyColor,
       headingColor,
     },
-    { merge: true }
+    { merge: true },
   ); // ✅ Prevents overwriting fonts
 
   alert("🎉 Colors saved!");
@@ -220,19 +300,18 @@ document.getElementById("save-colors").addEventListener("click", async () => {
 
 document.getElementById("save-fonts").addEventListener("click", async () => {
   const headingFont = document.getElementById("headingFontSelect").value;
-const bodyFont = document.getElementById("bodyFontSelect").value;
-const headerNameFont = document.getElementById("headerNameFontSelect").value;
+  const bodyFont = document.getElementById("bodyFontSelect").value;
+  const headerNameFont = document.getElementById("headerNameFontSelect").value;
 
-await setDoc(
-  doc(db, "siteSettings", "theme"),
-  {
-    headingFont,
-    bodyFont,
-    headerNameFont,
-  },
-  { merge: true }
-);
-
+  await setDoc(
+    doc(db, "siteSettings", "theme"),
+    {
+      headingFont,
+      bodyFont,
+      headerNameFont,
+    },
+    { merge: true },
+  );
 
   alert("🎉 Fonts saved!");
   applyThemeSettings();
