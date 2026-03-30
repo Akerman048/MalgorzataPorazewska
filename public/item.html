@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Małgorzata Porażewska</title>
-        <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="icon" type="image/png" href="./favicon.png" />
 
     <link rel="stylesheet" href="css/reset.css" />
     <link
@@ -14,12 +14,13 @@
     <link rel="stylesheet" href="css/style.css" />
     <link rel="stylesheet" href="css/item.css" />
     <link rel="stylesheet" href="css/typography.css" />
-
   </head>
   <body>
     <div class="page-wrapper">
       <section class="header container">
-        <span class="header__name"><a href="/" id="siteLogo">Małgorzata Porażewska</a></span>
+        <span class="header__name"
+          ><a href="/" id="siteLogo">Małgorzata Porażewska</a></span
+        >
         <button class="header__burger" id="burger-btn" aria-label="Toggle menu">
           <span class="burger-line top"></span>
           <span class="burger-line middle"></span>
@@ -41,7 +42,9 @@
             <h2 class="contact-modal__hero-title">
               Let’s create something together
             </h2>
-            <button class="contact-modal_email"><a href="">Contact me</a></button>
+            <button class="contact-modal_email">
+              <a href="">Contact me</a>
+            </button>
           </div>
           <div class="footer__wrap">
             <!-- <div class="footer__contact">
@@ -77,75 +80,96 @@
         <section id="item-details"></section>
       </main>
 
-  
-  <!-- Typography Settings Button (Visible for Admins Only) -->
-  <div style="display: none;"><button id="openTypographySettings" style="display: none;">🛠 Typography Editor</button></div>
-  
-  <!-- Typography Modal -->
-  <div id="typographyModal" class="typography-modal hidden">
-    <div class="typography-modal__content">
-      <h3>Typography Settings</h3>
-  
-      <!-- Element Selection -->
-      <label for="elementSelect">Select Element</label>
-      <select id="elementSelect">
-        <option value="headerName">Header Name</option>
-        <option value="navLink">Nav Link</option>
-        <option value="contactTitle">Contact Title</option>
-        <option value="footerTitle">Footer Title</option>
-        <option value="shapesHeading">Shapes Heading</option>
-        <option value="shapeLabel">Shape Label</option>
-        <option value="sliderHeading">Slider Heading</option>
-        <option value="selectedWorks">Selected Works Title</option>
-        <option value="instHeading">Instagram Heading</option>
-        <option value="smallHeading">Small Headings (h6)</option>
-        <option value="aboutText">About Text</option>
-        <option value="itemTitle">Work Item Title</option>
-        <option value="itemYear">Work Item Year</option>
-        <option value="itemDescription">Work Item Description</option>
-      </select>
-  
-      <!-- Desktop Styles -->
-      <h4>Desktop Styles</h4>
-      <label for="fontStyle">Font Style</label>
-      <select id="fontStyle">
-        <option value="normal">Normal</option>
-        <option value="italic">Italic</option>
-      </select>
-  
-      <label for="fontWeight">Font Weight</label>
-      <input type="number" id="fontWeight" min="100" max="900" step="100" />
-  
-      <label for="fontSize">Font Size (px)</label>
-      <input type="number" id="fontSize" min="10" max="100" step="1" />
-  
-      <label for="lineHeight">Line Height</label>
-      <input type="number" id="lineHeight" min="1" max="3" step="0.1" />
-  
-      <!-- Mobile Styles -->
-      <h4>Mobile Styles (<=768px)</h4>
-      <label for="mobileFontStyle">Font Style</label>
-      <select id="mobileFontStyle">
-        <option value="normal">Normal</option>
-        <option value="italic">Italic</option>
-      </select>
-  
-      <label for="mobileFontWeight">Font Weight</label>
-      <input type="number" id="mobileFontWeight" min="100" max="900" step="100" />
-  
-      <label for="mobileFontSize">Font Size (px)</label>
-      <input type="number" id="mobileFontSize" min="10" max="100" step="1" />
-  
-      <label for="mobileLineHeight">Line Height</label>
-      <input type="number" id="mobileLineHeight" min="1" max="3" step="0.1" />
-  
-      <!-- Buttons -->
-      <div class="modal-buttons">
-        <button id="saveTypography">Save</button>
-        <button id="closeTypographyModal">Cancel</button>
+      <!-- Typography Settings Button (Visible for Admins Only) -->
+      <div style="display: none">
+        <button id="openTypographySettings" style="display: none">
+          🛠 Typography Editor
+        </button>
       </div>
-    </div>
-  </div>
+
+      <!-- Typography Modal -->
+      <div id="typographyModal" class="typography-modal hidden">
+        <div class="typography-modal__content">
+          <h3>Typography Settings</h3>
+
+          <!-- Element Selection -->
+          <label for="elementSelect">Select Element</label>
+          <select id="elementSelect">
+            <option value="headerName">Header Name</option>
+            <option value="navLink">Nav Link</option>
+            <option value="contactTitle">Contact Title</option>
+            <option value="footerTitle">Footer Title</option>
+            <option value="shapesHeading">Shapes Heading</option>
+            <option value="shapeLabel">Shape Label</option>
+            <option value="sliderHeading">Slider Heading</option>
+            <option value="selectedWorks">Selected Works Title</option>
+            <option value="instHeading">Instagram Heading</option>
+            <option value="smallHeading">Small Headings (h6)</option>
+            <option value="aboutText">About Text</option>
+            <option value="itemTitle">Work Item Title</option>
+            <option value="itemYear">Work Item Year</option>
+            <option value="itemDescription">Work Item Description</option>
+          </select>
+
+          <!-- Desktop Styles -->
+          <h4>Desktop Styles</h4>
+          <label for="fontStyle">Font Style</label>
+          <select id="fontStyle">
+            <option value="normal">Normal</option>
+            <option value="italic">Italic</option>
+          </select>
+
+          <label for="fontWeight">Font Weight</label>
+          <input type="number" id="fontWeight" min="100" max="900" step="100" />
+
+          <label for="fontSize">Font Size (px)</label>
+          <input type="number" id="fontSize" min="10" max="100" step="1" />
+
+          <label for="lineHeight">Line Height</label>
+          <input type="number" id="lineHeight" min="1" max="3" step="0.1" />
+
+          <!-- Mobile Styles -->
+          <h4>Mobile Styles (<=768px)</h4>
+          <label for="mobileFontStyle">Font Style</label>
+          <select id="mobileFontStyle">
+            <option value="normal">Normal</option>
+            <option value="italic">Italic</option>
+          </select>
+
+          <label for="mobileFontWeight">Font Weight</label>
+          <input
+            type="number"
+            id="mobileFontWeight"
+            min="100"
+            max="900"
+            step="100"
+          />
+
+          <label for="mobileFontSize">Font Size (px)</label>
+          <input
+            type="number"
+            id="mobileFontSize"
+            min="10"
+            max="100"
+            step="1"
+          />
+
+          <label for="mobileLineHeight">Line Height</label>
+          <input
+            type="number"
+            id="mobileLineHeight"
+            min="1"
+            max="3"
+            step="0.1"
+          />
+
+          <!-- Buttons -->
+          <div class="modal-buttons">
+            <button id="saveTypography">Save</button>
+            <button id="closeTypographyModal">Cancel</button>
+          </div>
+        </div>
+      </div>
       <footer class="footer">
         <div class="footer__container">
           <!-- <div class="footer__wrap">
@@ -186,6 +210,5 @@
     <script src="js/theme.js" type="module"></script>
     <script src="js/script.js" type="module"></script>
     <script src="js/typography.js" type="module"></script>
-
   </body>
 </html>
