@@ -1,98 +1,150 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png?v=2" />
+    <title>Page Not Found | Małgorzata Porażewska</title>
 
-    <title>Page Not Found</title>
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="/favicon.png?v=3" />
 
-    <style media="screen">
+    <style>
+      :root {
+        --bg: #f7f3eb;
+        --text: #111111;
+        --muted: #6b6b6b;
+        --accent: #d6c08d;
+        --card: rgba(255, 255, 255, 0.7);
+        --border: rgba(17, 17, 17, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
       body {
-        background: #eceff1;
-        color: rgba(0, 0, 0, 0.87);
-        font-family: Roboto, Helvetica, Arial, sans-serif;
         margin: 0;
-        padding: 0;
+        min-height: 100%;
       }
-      #message {
-        background: white;
-        max-width: 360px;
-        margin: 100px auto 16px;
-        padding: 32px 24px 16px;
-        border-radius: 3px;
+
+      body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        padding: 24px;
+        background:
+          radial-gradient(
+            circle at top,
+            rgba(214, 192, 141, 0.18),
+            transparent 35%
+          ),
+          var(--bg);
+        color: var(--text);
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
       }
-      #message h3 {
-        color: #888;
-        font-weight: normal;
-        font-size: 16px;
-        margin: 16px 0 12px;
+
+      .error-card {
+        width: 100%;
+        max-width: 720px;
+        padding: 56px 32px;
+        border: 1px solid var(--border);
+        background: var(--card);
+        backdrop-filter: blur(8px);
+        text-align: center;
       }
-      #message h2 {
-        color: #ffa100;
-        font-weight: bold;
-        font-size: 16px;
-        margin: 0 0 8px;
+
+      .error-code {
+        margin: 0 0 12px;
+        font-size: clamp(64px, 12vw, 120px);
+        line-height: 0.9;
+        font-weight: 500;
+        letter-spacing: -0.04em;
+        color: var(--accent);
       }
-      #message h1 {
-        font-size: 22px;
-        font-weight: 300;
-        color: rgba(0, 0, 0, 0.6);
+
+      .error-title {
         margin: 0 0 16px;
+        font-size: clamp(28px, 4vw, 40px);
+        font-weight: 400;
+        letter-spacing: -0.02em;
       }
-      #message p {
-        line-height: 140%;
-        margin: 16px 0 24px;
-        font-size: 14px;
+
+      .error-text {
+        max-width: 520px;
+        margin: 0 auto 32px;
+        font-size: 16px;
+        line-height: 1.7;
+        color: var(--muted);
       }
-      #message a {
-        display: block;
-        text-align: center;
-        background: #039be5;
-        text-transform: uppercase;
+
+      .actions {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+
+      .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 160px;
+        padding: 14px 22px;
+        border: 1px solid var(--text);
         text-decoration: none;
+        font-size: 14px;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--text);
+        background: transparent;
+        transition:
+          background 0.25s ease,
+          color 0.25s ease,
+          transform 0.25s ease;
+      }
+
+      .button:hover {
+        background: var(--text);
         color: white;
-        padding: 16px;
-        border-radius: 4px;
+        transform: translateY(-1px);
       }
-      #message,
-      #message a {
-        box-shadow:
-          0 1px 3px rgba(0, 0, 0, 0.12),
-          0 1px 2px rgba(0, 0, 0, 0.24);
+
+      .button--secondary {
+        border-color: var(--border);
+        color: var(--muted);
       }
-      #load {
-        color: rgba(0, 0, 0, 0.4);
-        text-align: center;
-        font-size: 13px;
+
+      .button--secondary:hover {
+        background: white;
+        color: var(--text);
       }
-      @media (max-width: 600px) {
-        body,
-        #message {
-          margin-top: 0;
-          background: white;
-          box-shadow: none;
+
+      @media (max-width: 640px) {
+        .error-card {
+          padding: 40px 24px;
         }
-        body {
-          border-top: 16px solid #ffa100;
+
+        .button {
+          width: 100%;
         }
       }
     </style>
   </head>
   <body>
-    <div id="message">
-      <h2>404</h2>
-      <h1>Page Not Found</h1>
-      <p>
-        The specified file was not found on this website. Please check the URL
-        for mistakes and try again.
+    <main class="error-card">
+      <p class="error-code">404</p>
+      <h1 class="error-title">Page not found</h1>
+      <p class="error-text">
+        The page you are looking for does not exist, may have been moved, or is
+        temporarily unavailable.
       </p>
-      <h3>Why am I seeing this?</h3>
-      <p>
-        This page was generated by the Firebase Command-Line Interface. To
-        modify it, edit the <code>404.html</code> file in your project's
-        configured <code>public</code> directory.
-      </p>
-    </div>
+
+      <div class="actions">
+        <a class="button" href="/">Back to home</a>
+        <a class="button button--secondary" href="/works">View works</a>
+      </div>
+    </main>
   </body>
 </html>

@@ -73,7 +73,7 @@ async function loadPicturesSliderGallery() {
 
   const q = query(
     collection(db, "pictures_slider"),
-    orderBy("timeStamp", "desc")
+    orderBy("timeStamp", "desc"),
   );
 
   try {

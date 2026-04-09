@@ -68,12 +68,12 @@ div.swiper-pagination.swiper-pagination-fraction.swiper-pagination-horizontal {
 
 .mySwiper .swiper-button-next::after,
 .pictures-swiper-slider .swiper-button-next::after {
-  right: 20px; 
-  left: auto; 
+  right: 20px;
+  left: auto;
 }
 .mySwiper .swiper-button-prev::after,
 .pictures-swiper-slider .swiper-button-prev::after {
-  left: 20px; 
+  left: 20px;
   right: auto;
 }
 
@@ -101,11 +101,10 @@ div.swiper-pagination.swiper-pagination-fraction.swiper-pagination-horizontal {
     width: 100%;
     height: auto;
     display: flex;
-    justify-content: center; 
-    align-items: center;   
+    justify-content: center;
+    align-items: center;
     position: relative;
     text-align: center;
-    
   }
 
   .swiper-slide img {
@@ -115,9 +114,6 @@ div.swiper-pagination.swiper-pagination-fraction.swiper-pagination-horizontal {
     height: auto;
     object-fit: contain;
     display: block;
-    margin: 0 auto; 
-    
+    margin: 0 auto;
   }
-
-  
 }

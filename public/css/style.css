@@ -26,7 +26,6 @@ select {
   display: none;
 }
 
-
 .admin-only {
   display: none !important;
 }
@@ -55,7 +54,6 @@ body.is-admin .swiper__delete {
 body.is-admin .inst-block__delete {
   display: flex !important;
 }
-
 
 .container {
   max-width: 2540px;
@@ -526,6 +524,22 @@ body.is-admin .inst-block__delete {
   top: 0;
   left: 0;
   display: block;
+}
+
+.inst-position-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 10px 0;
+}
+
+#instPositionRange {
+  width: 180px;
+}
+
+#instPositionValue {
+  min-width: 44px;
+  font-size: 14px;
 }
 
 .inst-block__delete {

@@ -46,12 +46,10 @@
   margin-bottom: 0.25rem;
 }
 
-
 .typography-modal__content select,
-.typography-modal__content input{
-border-bottom: 1px solid rgba(128, 128, 128, 0.296);
+.typography-modal__content input {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.296);
 }
-
 
 .modal-buttons {
   display: flex;
@@ -60,29 +58,26 @@ border-bottom: 1px solid rgba(128, 128, 128, 0.296);
   margin-top: 1rem;
 }
 
-#saveTypography{
+#saveTypography {
   padding: 5px 10px;
   background-color: rgb(3, 131, 236);
   border-radius: 5px;
-  transition: .3s;
+  transition: 0.3s;
 }
 
-#saveTypography:hover{
+#saveTypography:hover {
   background-color: rgb(2, 64, 209);
-  
 }
 
-
-#closeTypographyModal{
+#closeTypographyModal {
   padding: 5px 10px;
   background-color: #ff9f9f;
   border-radius: 5px;
-  transition: .3s;
+  transition: 0.3s;
 }
 
-#closeTypographyModal:hover{
+#closeTypographyModal:hover {
   background-color: #800505;
-  
 }
 
 /* @media screen and (max-width: 768px) {

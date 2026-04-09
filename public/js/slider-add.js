@@ -24,26 +24,24 @@ const cancelBtn = document.getElementById("slider-modal-cancel");
 const sliderWrapper = document.getElementById("swiper-block-wrapper");
 
 function initializeSwiper() {
-    new Swiper(".mySwiper", {
-      // autoHeight: true,
-      effect: "fade",
-      loop: true,
-      autoplay: {
-        delay: 2500,
-        disableOnInteraction: false,
-      },
-      pagination: {
-        el: ".swiper-pagination",
-        type: "fraction",
-      },
-      navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
-      },
-    });
-  }
-
-  
+  new Swiper(".mySwiper", {
+    // autoHeight: true,
+    effect: "fade",
+    loop: true,
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      type: "fraction",
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+  });
+}
 
 // Open modal
 openModalBtn.addEventListener("click", () => {
@@ -96,7 +94,7 @@ async function loadSliderGallery() {
 
   const q = query(
     collection(db, "slider_photos"),
-    orderBy("timestamp", "desc")
+    orderBy("timestamp", "desc"),
   );
   const querySnapshot = await getDocs(q);
 
@@ -121,4 +119,3 @@ async function loadSliderGallery() {
 }
 
 loadSliderGallery();
-

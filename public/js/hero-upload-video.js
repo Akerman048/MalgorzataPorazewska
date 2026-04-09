@@ -22,20 +22,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const modal = document.getElementById("uploadModal");
 
-function showModal() {
-  modal.classList.remove("hidden");
-}
+  function showModal() {
+    modal.classList.remove("hidden");
+  }
 
-function hideModal() {
-  modal.classList.add("hidden");
-}
-
+  function hideModal() {
+    modal.classList.add("hidden");
+  }
 
   uploadBtn.addEventListener("click", async () => {
-    const videoFile  = fileInput.files[0];
+    const videoFile = fileInput.files[0];
     const posterFile = posterInput.files[0];
 
-    if (!videoFile  || !posterFile) {
+    if (!videoFile || !posterFile) {
       alert("Please select a video file.");
       return;
     }
@@ -45,7 +44,7 @@ function hideModal() {
     try {
       const videoRef = ref(storage, VIDEO_STORAGE_PATH);
       await uploadBytes(videoRef, videoFile);
-      const videoURL  = await getDownloadURL(videoRef);
+      const videoURL = await getDownloadURL(videoRef);
 
       let posterURL = "";
       if (posterFile) {
@@ -78,15 +77,15 @@ function hideModal() {
       const videoDoc = await getDoc(doc(db, "hero", "video"));
       if (videoDoc.exists()) {
         const { url, poster } = videoDoc.data();
-  
+
         const videoURL = `${url}?t=${Date.now()}`;
         const posterURL = `${poster}?t=${Date.now()}`;
-  
+
         videoSource.src = videoURL;
         videoElement.removeAttribute("poster");
         videoElement.poster = posterURL;
         videoElement.load();
-  
+
         localStorage.setItem("heroVideoURL", videoURL);
       } else {
         console.warn("Video document not found.");
@@ -95,7 +94,6 @@ function hideModal() {
       console.error("Failed to load video:", error);
     }
   }
-  
 
   loadHeroVideo();
 });

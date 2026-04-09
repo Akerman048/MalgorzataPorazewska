@@ -14,10 +14,10 @@ import { auth } from "./firebase-config.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
 const gallery = document.getElementById("works__list");
-const clearBtn = document.querySelector(".works__clear");
 const categoryList = document.getElementById("categoryList");
 const addCategoryBtn = document.getElementById("addCategoryBtn");
 const newCategoryInput = document.getElementById("newCategoryInput");
+
 let selectedCategories = [];
 let isLoggedIn = false;
 
@@ -34,7 +34,6 @@ function getCategoryFromURL() {
 
 function updateURLFromSelectedCategories() {
   const url = new URL(window.location);
-
   url.searchParams.delete("category");
 
   selectedCategories.forEach((category) => {
@@ -53,11 +52,12 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 onAuthStateChanged(auth, async (user) => {
   isLoggedIn = !!user;
+
   const uploadForm = document.querySelector(".upload-form");
   const categoryAdmin = document.getElementById("category-admin");
 
   if (uploadForm) {
-    uploadForm.style.display = isLoggedIn ? "block" : "none";
+    uploadForm.style.display = isLoggedIn ? "flex" : "none";
   }
 
   if (categoryAdmin) {
@@ -70,7 +70,10 @@ onAuthStateChanged(auth, async (user) => {
 if (addCategoryBtn) {
   addCategoryBtn.addEventListener("click", async () => {
     const name = newCategoryInput.value.trim().toLowerCase();
-    if (!name) return alert("Enter a category name");
+    if (!name) {
+      alert("Enter a category name");
+      return;
+    }
 
     const docRef = doc(db, "categories", name);
     const existing = await getDoc(docRef);
@@ -86,6 +89,7 @@ if (addCategoryBtn) {
       alert("✅ Category added");
       await loadCategories();
       await renderCategoryButtons();
+      await renderUploadCategoryRadios();
     } catch (err) {
       console.error(err);
       alert("❌ Failed to add category");
@@ -95,6 +99,7 @@ if (addCategoryBtn) {
 
 async function loadCategories() {
   if (!categoryList) return;
+
   categoryList.innerHTML = "";
   const snapshot = await getDocs(collection(db, "categories"));
 
@@ -118,12 +123,15 @@ async function loadCategories() {
       const newName = prompt("Enter new category name:", oldName);
 
       if (!newName || newName.toLowerCase() === oldName.toLowerCase()) return;
-      const newId = newName.toLowerCase();
 
+      const newId = newName.toLowerCase();
       const newDocRef = doc(db, "categories", newId);
       const exists = await getDoc(newDocRef);
-      if (exists.exists())
-        return alert("❗ Category with this name already exists.");
+
+      if (exists.exists()) {
+        alert("❗ Category with this name already exists.");
+        return;
+      }
 
       try {
         await setDoc(newDocRef, { name: newName });
@@ -133,6 +141,7 @@ async function loadCategories() {
           where("category", "==", oldId),
         );
         const snapshot = await getDocs(q);
+
         await Promise.all(
           snapshot.docs.map((docSnap) =>
             updateDoc(doc(db, "works", docSnap.id), { category: newId }),
@@ -140,9 +149,11 @@ async function loadCategories() {
         );
 
         await deleteDoc(doc(db, "categories", oldId));
+
         alert("✅ Category updated");
         await loadCategories();
         await renderCategoryButtons();
+        await renderUploadCategoryRadios();
         await loadWorks();
       } catch (err) {
         console.error(err);
@@ -161,6 +172,7 @@ async function loadCategories() {
         alert("✅ Category deleted");
         await loadCategories();
         await renderCategoryButtons();
+        await renderUploadCategoryRadios();
         await loadWorks();
       } catch (err) {
         console.error(err);
@@ -174,15 +186,14 @@ function updateClearButtonVisibility() {
   const clearBtn = document.querySelector(".works__clear");
   if (!clearBtn) return;
 
-  if (clearBtn) {
-    clearBtn.style.display =
-      selectedCategories.length > 0 ? "inline-flex" : "none";
-  }
+  clearBtn.style.display =
+    selectedCategories.length > 0 ? "inline-flex" : "none";
 }
 
 async function renderCategoryButtons() {
   const container = document.getElementById("categoryButtons");
   if (!container) return;
+
   container.innerHTML = "";
 
   const snapshot = await getDocs(collection(db, "categories"));
@@ -192,12 +203,14 @@ async function renderCategoryButtons() {
   snapshot.forEach((docSnap) => {
     const { name } = docSnap.data();
     const normalized = name.toLowerCase();
+
     if (seen.has(normalized)) return;
     seen.add(normalized);
 
     const button = document.createElement("button");
     button.className = "works__categories-btn works-category-btn";
     button.textContent = capitalize(name);
+
     if (selectedCategories.includes(normalized)) {
       button.classList.add("ctgrActive");
     }
@@ -208,7 +221,6 @@ async function renderCategoryButtons() {
 
   container.appendChild(fragment);
 
-  // 👇 Add the clear button once
   const clearBtn = document.createElement("button");
   clearBtn.className = "works__categories-btn works-category-btn works__clear";
   clearBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
@@ -226,7 +238,7 @@ async function renderCategoryButtons() {
   });
 
   container.appendChild(clearBtn);
-  updateClearButtonVisibility(); // ← Set initial visibility
+  updateClearButtonVisibility();
 }
 
 function capitalize(str) {
@@ -249,9 +261,8 @@ function toggleCategory(category, button) {
 
 async function loadWorks() {
   if (!gallery) return;
-  gallery.innerHTML = "Loading...";
 
-  console.log("👤 isLoggedIn:", isLoggedIn);
+  gallery.innerHTML = "Loading...";
 
   let worksQuery = collection(db, "works");
   if (selectedCategories.length > 0) {
@@ -260,40 +271,52 @@ async function loadWorks() {
 
   const snapshot = await getDocs(worksQuery);
   gallery.innerHTML = "";
-  console.log("📦 Works loaded:", snapshot.size);
 
   if (snapshot.empty) {
     gallery.innerHTML = "<p>No works in this category</p>";
-  } else {
-    snapshot.forEach((doc) => {
-      const data = doc.data();
-      const id = doc.id;
-
-      const card = document.createElement("div");
-      card.classList.add("works__item-wrapper");
-
-      card.innerHTML = `
-        <a href="item.html?slug=${data.slug}" class="works__item">
-          <div class="works__img-wrapper">
-            <img class="works__img" src="${data.images?.[0]}" alt="${data.title}" loading="lazy"/>
-          </div>
-          <h3 class="works__title">${data.title}</h3>
-        </a>
-        ${
-          isLoggedIn
-            ? `<button class="delete-btn" data-id="${id}">🗑 Delete</button>` +
-              `<button class="toggle-selected-btn" data-id="${id}" data-selected="${!!data.selected}">
-                ${data.selected ? "Remove from favorites" : "Add to favorites"}
-              </button>`
-            : ""
-        }
-      `;
-      gallery.appendChild(card);
-    });
+    return;
   }
 
+  snapshot.forEach((docSnap) => {
+    const data = docSnap.data();
+    const id = docSnap.id;
+
+    const card = document.createElement("div");
+    card.classList.add("works__item-wrapper");
+
+    card.innerHTML = `
+      <a href="item.html?slug=${data.slug}" class="works__item">
+        <div class="works__img-wrapper">
+          <img
+            class="works__img"
+            src="${data.images?.[0] || ""}"
+            alt="${data.title}"
+            loading="lazy"
+            style="object-position: ${data.coverObjectPosition || "center 50%"};"
+          />
+        </div>
+        <h3 class="works__title">${data.title}</h3>
+      </a>
+      ${
+        isLoggedIn
+          ? `
+            <button class="delete-btn" data-id="${id}">🗑 Delete</button>
+            <button
+              class="toggle-selected-btn"
+              data-id="${id}"
+              data-selected="${!!data.selected}"
+            >
+              ${data.selected ? "Remove from favorites" : "Add to favorites"}
+            </button>
+          `
+          : ""
+      }
+    `;
+
+    gallery.appendChild(card);
+  });
+
   requestAnimationFrame(() => {
-    console.log("🔧 Setting up buttons");
     setupDeleteButtons();
     setupSelectedButtons();
   });
@@ -304,7 +327,7 @@ async function renderUploadCategoryRadios() {
   if (!container) return;
 
   const snapshot = await getDocs(collection(db, "categories"));
-  container.innerHTML = ""; // Очистити перед ререндером
+  container.innerHTML = "";
 
   snapshot.forEach((docSnap, index) => {
     const { name } = docSnap.data();
@@ -314,7 +337,13 @@ async function renderUploadCategoryRadios() {
     const wrapper = document.createElement("label");
     wrapper.className = "upload-category-option";
     wrapper.innerHTML = `
-      <input type="radio" name="uploadCategory" value="${id}" id="${radioId}" ${index === 0 ? "checked" : ""} />
+      <input
+        type="radio"
+        name="uploadCategory"
+        value="${id}"
+        id="${radioId}"
+        ${index === 0 ? "checked" : ""}
+      />
       ${capitalize(name)}
     `;
     container.appendChild(wrapper);
@@ -324,7 +353,6 @@ async function renderUploadCategoryRadios() {
 function setupDeleteButtons() {
   document.querySelectorAll(".delete-btn").forEach((btn) => {
     btn.addEventListener("click", async () => {
-      console.log("clicked");
       const id = btn.dataset.id;
       if (!confirm("Delete this work?")) return;
 
@@ -341,11 +369,7 @@ function setupDeleteButtons() {
 }
 
 function setupSelectedButtons() {
-  console.log("setupSelectedButtons is running...");
-
   document.querySelectorAll(".toggle-selected-btn").forEach((btn) => {
-    console.log("Button attached:", btn);
-
     btn.addEventListener("click", async () => {
       const id = btn.dataset.id;
       const current = btn.getAttribute("data-selected") === "true";
@@ -357,13 +381,10 @@ function setupSelectedButtons() {
       try {
         await updateDoc(doc(db, "works", id), { selected: !current });
 
-        // Update UI immediately
         btn.setAttribute("data-selected", (!current).toString());
         btn.textContent = !current
           ? "Remove from favorites"
           : "Add to favorites";
-
-        console.log(`Updated Firestore: selected = ${!current}`);
       } catch (err) {
         console.error("❌ Firestore update error:", err);
         alert("❌ Failed to update selected status");

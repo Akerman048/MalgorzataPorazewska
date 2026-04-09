@@ -57,11 +57,7 @@ uploadBgImgBtn.addEventListener("click", async () => {
     };
     img.src = url;
 
-    await setDoc(
-      doc(db, "about", "background"),
-      { url },
-      { merge: true }
-    );
+    await setDoc(doc(db, "about", "background"), { url }, { merge: true });
   } catch (error) {
     console.log(error);
     alert("❌ Failed to upload.");
@@ -126,7 +122,7 @@ uploadAboutTitleBtn.addEventListener("click", async () => {
       {
         about_title: title,
       },
-      { merge: true }
+      { merge: true },
     );
 
     aboutTitle.textContent = title;

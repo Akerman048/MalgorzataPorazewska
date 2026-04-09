@@ -15,7 +15,7 @@ document.addEventListener("click", async (e) => {
     const imageUrl = img.src;
 
     const fileName = decodeURIComponent(
-      imageUrl.split("%2F").pop().split("?")[0]
+      imageUrl.split("%2F").pop().split("?")[0],
     );
 
     if (!confirm(`Delete image "${fileName}"?`)) return;

@@ -58,7 +58,7 @@ async function loadWorkBySlug(slug) {
                       ? `<button class="delete-image-btn" data-index="${index}">delete🗑️</button>`
                       : ""
                   }
-                </div>`
+                </div>`,
                 )
                 .join("")}
             </div>
@@ -73,7 +73,7 @@ async function loadWorkBySlug(slug) {
                   (img) => `
                 <div class="swiper-slide">
                   <img src="${img}" alt="${data.title}" loading="lazy"/>
-                </div>`
+                </div>`,
                 )
                 .join("")}
             </div>

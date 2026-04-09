@@ -32,13 +32,12 @@ async function loadSelectedWorks() {
         <span class="selected-works__title">${data.title}</span>
       </a>
     `;
-    container.appendChild(li);
+      container.appendChild(li);
     });
   } catch (error) {
     console.error("Error loading featured works:", error);
     container.innerHTML = "<p>Failed to load featured works.</p>";
   }
 }
-
 
 loadSelectedWorks();
