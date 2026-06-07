@@ -43,13 +43,13 @@ project/
 Clone the repository:
 
 ```bash
-git clone your_repository_url
+git clone https://github.com/Akerman048/MalgorzataPorazewska
 ```
 
 Open the project folder:
 
 ```bash
-cd your_project_name
+cd MalgorzataPorazewska
 ```
 
 Install dependencies if your project uses any:
